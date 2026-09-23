@@ -1,0 +1,13 @@
+# Consistent line endings for repository documentation and metadata.
+# Avoid repository-wide renormalisation of existing project sources.
+*.md text eol=lf
+/LICENSE text eol=lf
+/.gitignore text eol=lf
+/.gitattributes text eol=lf
+
+# Preserve binary documents and review images without text merging.
+*.docx binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary

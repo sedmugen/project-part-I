@@ -1,0 +1,25 @@
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor and Office temporary files
+~$*
+*.swp
+*.swo
+
+# Python caches from existing document-production tools
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Do not broadly ignore DOCX, PDF, images or working directories:
+# project sources, reference material and review evidence need explicit review.
+# Add framework-specific rules only when the implementation stack is selected.
