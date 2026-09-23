@@ -43,6 +43,16 @@ No deliverable may alter persona names, canonical ages, or primary/secondary cla
 ### 1.6 External Deliverable Self-Containment
 Submission deliverables (`01_Deliverable_1`, `02_Deliverable_2`, `03_Deliverable_3`) are evaluated by academic examiners. They must be completely readable and self-contained without requiring the reader to have access to this internal `00_Project_Governance` directory.
 
+### 1.7 Single Source of Truth and Precedence
+Markdown is the authoritative source format for all DailyKhata project assets. DOCX and PDF files are exports or historical archives only.
+- **Governance source of truth:** `00_Project_Governance/*.md`
+- **Deliverable 1 source of truth:** `01_Deliverable_1/D1.md`
+- **Deliverable 2 source of truth:** `02_Deliverable_2/D2.md`
+- **Deliverable 3 source of truth:** `03_Deliverable_3/D3.md`
+- **Precedence Rule:** Current Markdown takes precedence unless a later Decision Log entry explicitly changes it.
+- **Archive Isolation:** Archived files in `archive/` must not override current Markdown.
+- **Export Rule:** Future DOCX files are generated from the authoritative Markdown only when needed for formal submission.
+
 ---
 
 ## 2. Invariant Architecture Boundaries

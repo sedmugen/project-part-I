@@ -8,6 +8,20 @@ DailyKhata is at the requirements and planning stage. Project Part I includes go
 
 The capabilities below describe intended scope, not completed features. D3 records proposed acceptance targets; implementation testing and supervisor endorsement remain pending.
 
+## Source of Truth
+
+Markdown is the authoritative source format for all DailyKhata project assets. DOCX and PDF files are exports or historical reference only.
+
+- **Governance source of truth:** `00_Project_Governance/*.md`
+- **Deliverable 1 source of truth:** [`01_Deliverable_1/D1.md`](01_Deliverable_1/D1.md)
+- **Deliverable 2 source of truth:** [`02_Deliverable_2/D2.md`](02_Deliverable_2/D2.md)
+- **Deliverable 3 source of truth:** [`03_Deliverable_3/D3.md`](03_Deliverable_3/D3.md)
+
+Precedence and export rules:
+- **Precedence:** Current Markdown takes precedence unless a later Decision Log entry explicitly changes it.
+- **Archive Isolation:** Archived files in `archive/` must not override current Markdown.
+- **Export Policy:** DOCX and PDF files are exports or historical reference only. Future DOCX files are generated from the authoritative Markdown only when needed for formal submission.
+
 ## FYP context and team
 
 This is a BS Computer Science Final Year Project at **Beaconhouse National University**, academic year **2026-2027**.
@@ -41,7 +55,7 @@ Core **Must Have** capabilities include:
 
 Current scope excludes bank and wallet integration, payment processing, money transfers, shared household accounts, collaborative budgeting, inventory, point-of-sale functionality and complete business accounting. Automatic recurring expense creation and predictive analytics are future scope. An internal Chart of Accounts does not imply a full accounting suite, and the assistant cannot execute payments or change records.
 
-The [Project Scope](00_Project_Governance/DailyKhata_Project_Scope.docx) and [D3 requirements](03_Deliverable_3/DailyKhata_Deliverable_3_v1.0.docx) contain the full boundaries and priorities.
+The [Project Scope](00_Project_Governance/PROJECT_SCOPE.md) and [D3 requirements](03_Deliverable_3/D3.md) contain the full boundaries and priorities.
 
 ## Repository structure
 
@@ -49,12 +63,23 @@ The current Git root is the `project-part-I` directory itself. Paths below are r
 
 ```text
 project-part-I/
-|-- 00_Project_Governance/   Scope, terminology, decisions and documentation standards
-|-- 01_Deliverable_1/        Target market and audience analysis, originals and task brief
-|-- 02_Deliverable_2/        Problem, stakeholders and elicitation, originals and teaching material
-|-- 03_Deliverable_3/        Requirements specification, task brief and working artefacts
-|-- References/            Currently empty local reference directory
-|-- .github/               Pull request template
+|-- 00_Project_Governance/       Authoritative project governance Markdown files
+|   |-- README.md                Governance directory overview and authority guide
+|   |-- PROJECT_SCOPE.md         Canonical scope baseline and boundaries
+|   |-- DOCUMENTATION_STANDARD.md Writing, formatting and requirement rules
+|   |-- CANONICAL_TERMINOLOGY.md Approved vocabulary and persona identities
+|   |-- DECISION_LOG.md          Chronological project decisions and confirmation items
+|   |-- CONSISTENCY_RULES.md     Cross-document consistency and precedence rules
+|   `-- reconstruction_work/     Supporting authoring and audit scripts
+|-- 01_Deliverable_1/            Deliverable 1 authoritative Markdown (D1.md) and task brief
+|-- 02_Deliverable_2/            Deliverable 2 authoritative Markdown (D2.md) and task brief
+|-- 03_Deliverable_3/            Deliverable 3 authoritative Markdown (D3.md), task brief and working artefacts
+|-- archive/                     Archived exports and historical records
+|   |-- historical-submissions/  Original submitted DOCX/PDF files
+|   |-- old-docx/                Earlier reconstructed and submission-edition DOCX files
+|   `-- superseded-governance/   Superseded governance DOCX files
+|-- References/                  Local reference directory
+|-- .github/                     Pull request template
 |-- README.md
 |-- CONTRIBUTING.md
 |-- CODE_OF_CONDUCT.md
@@ -72,20 +97,20 @@ Start with current governance, then read D1, D2 and D3 in order.
 
 | Document | Purpose |
 | --- | --- |
-| [Project Scope](00_Project_Governance/DailyKhata_Project_Scope.docx) | Current scope authority and capability priorities |
-| [Canonical Terminology](00_Project_Governance/DailyKhata_Canonical_Terminology.docx) | Shared concepts and identities |
-| [Decision Log](00_Project_Governance/DailyKhata_Decision_Log.docx) | Scope decisions and unresolved confirmations |
-| [Documentation Standard](00_Project_Governance/DailyKhata_Documentation_Standard.docx) | Language, document control, formatting and review rules |
-| [Consistency Audit](00_Project_Governance/DailyKhata_Consistency_Audit.docx) | Governance, D1 and D2 consistency review and limitations |
-| [D1 v2.0: Target Market & Audience Analysis](01_Deliverable_1/DailyKhata_Deliverable_1_v2.0.docx) | Intended users, problems and project foundation |
-| [D2 v2.0: Problem Identification, Stakeholder Identification & Requirement Elicitation](02_Deliverable_2/DailyKhata_Deliverable_2_v2.0.docx) | Evidence, stakeholders and derived requirement candidates |
-| [D3 v1.0: Requirements Specification](03_Deliverable_3/DailyKhata_Deliverable_3_v1.0.docx) | Business, functional and non-functional requirements, traceability and proposed acceptance criteria |
+| [Project Scope](00_Project_Governance/PROJECT_SCOPE.md) | Current scope authority and capability priorities |
+| [Canonical Terminology](00_Project_Governance/CANONICAL_TERMINOLOGY.md) | Shared concepts and identities |
+| [Decision Log](00_Project_Governance/DECISION_LOG.md) | Scope decisions and unresolved confirmations |
+| [Documentation Standard](00_Project_Governance/DOCUMENTATION_STANDARD.md) | Language, document control, formatting and review rules |
+| [Consistency Rules](00_Project_Governance/CONSISTENCY_RULES.md) | Cross-document consistency and precedence rules |
+| [D1: Target Market & Audience Analysis](01_Deliverable_1/D1.md) | Intended users, problems and project foundation |
+| [D2: Problem Identification, Stakeholder Identification & Requirement Elicitation](02_Deliverable_2/D2.md) | Evidence, stakeholders and derived requirement candidates |
+| [D3: Requirements Specification](03_Deliverable_3/D3.md) | Business, functional and non-functional requirements, traceability and proposed acceptance criteria |
 
-Historical v1.0 governance and original `dailykhata-d1` and `dailykhata-d2` files are retained for provenance. Use the current documents linked above when interpreting reconciled scope. Historical PDFs are not necessarily exports of the current Word versions. A document version or baseline label does not establish supervisor approval.
+Historical v1.0 governance and original submission files are preserved in `archive/` for provenance. Use the authoritative Markdown documents linked above when interpreting reconciled scope. Archived files must not override current Markdown. A document version or baseline label does not establish supervisor approval.
 
 ## Setup and development
 
-For now, clone the repository and open the linked documents in a compatible document reader. There are no application installation, build or test commands yet.
+For now, clone the repository and read the authoritative Markdown documents. There are no application installation, build or test commands yet.
 
 Before implementation begins, record the selected delivery approach, language, framework, database, OCR and model services, and hosting decisions through the existing decision process. Then add reproducible setup instructions, runtime versions, a sanitised configuration example and build/test commands here. Do not infer application dependencies from the document-production scripts.
 
@@ -100,7 +125,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for branch names, commits, reviews and te
 - Use British English and the canonical DailyKhata terminology. Do not use em dash characters.
 - Preserve requirement identifiers and priorities. Reference existing `SC`, `SS`, `BR`, `FR` and `NFR` IDs where relevant; retain D2 `EV` and `DR` provenance links.
 - Distinguish planned, implemented and validated behaviour. Proposed targets and source-reported research are not measured results.
-- Coordinate changes to Word files before editing. Preserve historical sources and use the Documentation Standard for revised deliverables.
+- Authoritative documentation is maintained in Markdown. Generate Word exports only when formal submission editions are required.
 - Record scope changes in the Decision Log before propagating them to affected documents; do not silently alter the baseline.
 - Use synthetic or properly anonymised examples. Keep credentials, private receipts, participant records and personal contact details out of commits and reviews.
 
