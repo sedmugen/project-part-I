@@ -1,0 +1,101 @@
+{
+  "DailyKhata_Deliverable_1_v2.0.docx": {
+    "pages": 12,
+    "tables": 5,
+    "structural_checks": "passed",
+    "em_dash_count": 0,
+    "fonts": [
+      "/BCDEEE+TimesNewRomanPSMT",
+      "/BCDFEE+TimesNewRomanPS-BoldMT",
+      "/BCDGEE+TimesNewRomanPS-BoldMT"
+    ],
+    "unused_style_colour_flags": 21
+  },
+  "DailyKhata_Deliverable_2_v2.0.docx": {
+    "pages": 19,
+    "tables": 11,
+    "structural_checks": "passed",
+    "em_dash_count": 0,
+    "fonts": [
+      "/BCDEEE+TimesNewRomanPSMT",
+      "/BCDFEE+TimesNewRomanPS-BoldMT",
+      "/BCDGEE+TimesNewRomanPS-BoldMT"
+    ],
+    "unused_style_colour_flags": 21
+  },
+  "DailyKhata_Canonical_Terminology.docx": {
+    "pages": 6,
+    "tables": 2,
+    "structural_checks": "passed",
+    "em_dash_count": 0,
+    "fonts": [
+      "/BCDEEE+TimesNewRomanPSMT",
+      "/BCDFEE+TimesNewRomanPS-BoldMT",
+      "/BCDGEE+TimesNewRomanPS-BoldMT"
+    ],
+    "unused_style_colour_flags": 21
+  },
+  "DailyKhata_Consistency_Audit.docx": {
+    "pages": 11,
+    "tables": 5,
+    "structural_checks": "passed",
+    "em_dash_count": 0,
+    "fonts": [
+      "/BCDEEE+TimesNewRomanPSMT",
+      "/BCDFEE+TimesNewRomanPS-BoldMT",
+      "/BCDGEE+TimesNewRomanPS-BoldMT"
+    ],
+    "unused_style_colour_flags": 21
+  },
+  "DailyKhata_Decision_Log.docx": {
+    "pages": 9,
+    "tables": 1,
+    "structural_checks": "passed",
+    "em_dash_count": 0,
+    "fonts": [
+      "/BCDEEE+TimesNewRomanPSMT",
+      "/BCDFEE+TimesNewRomanPS-BoldMT",
+      "/BCDGEE+TimesNewRomanPS-BoldMT"
+    ],
+    "unused_style_colour_flags": 21
+  },
+  "DailyKhata_Documentation_Standard.docx": {
+    "pages": 6,
+    "tables": 1,
+    "structural_checks": "passed",
+    "em_dash_count": 0,
+    "fonts": [
+      "/BCDEEE+TimesNewRomanPSMT",
+      "/BCDFEE+TimesNewRomanPS-BoldMT",
+      "/BCDGEE+TimesNewRomanPS-BoldMT"
+    ],
+    "unused_style_colour_flags": 21
+  },
+  "DailyKhata_Project_Scope.docx": {
+    "pages": 10,
+    "tables": 3,
+    "structural_checks": "passed",
+    "em_dash_count": 0,
+    "fonts": [
+      "/BCDEEE+TimesNewRomanPSMT",
+      "/BCDFEE+TimesNewRomanPS-BoldMT",
+      "/BCDGEE+TimesNewRomanPS-BoldMT"
+    ],
+    "unused_style_colour_flags": 21
+  },
+  "cross_document": {
+    "scope_entries": 38,
+    "personas": 5,
+    "shared_design_paragraphs": 12,
+    "matching_canonical_tables": 4,
+    "source_hashes_unchanged": 10,
+    "result": "passed"
+  },
+  "release": {
+    "visual_review": "All 73 final pages inspected",
+    "rendered_colours": "greyscale",
+    "spelling_review": "British English completed; proper names and technical terms accepted",
+    "TOC_and_lists": "refreshed in Word and checked",
+    "Deliverable_3": "not created"
+  }
+}

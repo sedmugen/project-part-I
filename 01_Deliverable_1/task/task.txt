@@ -1,0 +1,35 @@
+To identify the intended users of the proposed system and understand their needs, problems, and expectations. This activity will help students define appropriate requirements and develop a solution that addresses real user problems.
+
+Students are required to submit a document containing the following:
+
+Identify the overall market/audience for the proposed solution
+
+Identify primary users and secondary users of the system
+
+Describe the problems faced by users and their expectations from the proposed system
+
+Explain why this target market is suitable and relevant for the proposed solution.
+Criteria
+Marks
+Identification of primary and secondary end users
+1
+Understanding of user problems, needs, and expectations
+1
+Justification of selected target market
+1
+Alignment of target market with proposed project idea
+1
+Clarity, completeness, and quality of documentation
+1
+
+https://www.youtube.com/watch?v=11qEHsvq7ec&list=PLQykyC1zr8f_ZcAZoTz-rruBBOP4Fmii5&index=12
+
+
+Discuss the deliverable with your assigned supervisor before submission
+
+Incorporate supervisor feedback and finalize the document.
+
+Submit the approved deliverable to your supervisor within the assigned deadline online
+
+Marks will be awarded based on the quality of work, understanding, and discussion with the supervisor.
+Students will be able to identify their intended users and define a clear direction for requirement engineering activities by understanding real-world user needs and expectations.

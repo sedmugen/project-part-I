@@ -1,0 +1,59 @@
+Deliverable 2: Problem Identification, Stakeholder Identification & Requirement Elicitation  
+
+Students are required to submit the following three deliverables as part of their project development process. The submission must be project-specific and evidence-based. Simply providing definitions or theoretical explanations is not sufficient.
+
+1. Problem Identification
+Students must clearly identify and define the problem that their proposed project intends to address.
+The deliverable must include:
+A clear description of the identified problem.
+The context/situation in which the problem exists.
+Existing process/system and its limitations, where applicable.
+The method/approach used to identify the problem, such as:
+Observation
+Interviews
+Survey/Questionnaire
+Literature/Market Research
+Existing System Analysis
+User Feedback
+A clear explanation of how the selected method was actually used to identify the problem.Evidence/findings obtained through the selected method.A well-defined and concise Problem Statement.
+Note: Students must explain what they actually did to identify the problem. Simply stating “the problem was identified through observation/interview” is not sufficient.
+
+Problem Statement of maximum 4 Lines.
+
+2. Stakeholder Identification
+Students must identify and analyse all relevant stakeholders associated with their project.
+The following analysis is mandatory:Industry → Market → Market Segment → User Profile → Persona → Stakeholders
+Students must clearly identify:
+Industry: The industry/domain in which the proposed solution will operate.
+Market: The relevant market within that industry.
+Market Segment: The specific segment being targeted.
+User Profile: Characteristics, needs, behaviour, expectations, technical knowledge, and other relevant attributes of the target users.
+Persona: A representative user persona based on the identified user profile. The persona should include relevant information such as:
+Role/Occupation
+Goals
+Needs
+Pain Points
+Behaviour
+Expectations
+Other Stakeholders: Any additional stakeholders such as administrators, business owners, managers, service providers, organisations, regulatory bodies, etc., where applicable.
+For each stakeholder, students must explain their role, interest, needs, and impact on the proposed system.
+
+A Table Having all above parameters.
+
+3. Requirement Elicitation
+Students must identify the Requirement Elicitation Technique(s) used to collect requirements for their proposed system.
+Possible techniques include:
+Interviews
+Surveys/Questionnaires
+Observation
+Focus Groups
+Brainstorming
+Document Analysis
+Existing System Analysis
+Workshops
+Prototyping
+User Feedback/User Stories
+For each technique used, students must explain:Which technique was used?Why was this technique selected?Who/which stakeholders or users were involved?How was the technique conducted?What information/findings were obtained?How were the findings converted into system requirements?
+
+Important: Students must provide evidence of how the elicitation technique was applied to their project. Merely defining an elicitation technique is not acceptable.Expected Outcome
+It is important to note that when you submit your task to supervisor, your marks must be uploaded within 1 week of the submission. Submission Date is 25th August, 2026

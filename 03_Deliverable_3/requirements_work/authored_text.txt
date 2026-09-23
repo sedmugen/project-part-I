@@ -1,0 +1,2047 @@
+Beaconhouse National University
+BS Computer Science
+Final Year Project
+DAILYKHATA
+Deliverable 3
+Requirements Specification
+Team members
+Saad Mughal (F2023-009)
+Khadijah Zahoor (F2023-956)
+Zainab Ali Baig (F2023-528)
+Aleeza Qaiser (F2023-611)
+Supervisor: Nouman Ali
+Academic Year: 2026-2027
+Version 1.0 | 23 September 2026
+
+Document Control
+Project: DailyKhata
+Document: Requirements Specification
+Deliverable: 3
+Version: 1.0
+Status: Authoritative Requirements Baseline
+Authors: DailyKhata Project Team
+Supervisor: Nouman Ali
+Academic Year: 2026-2027
+Revision date: 23 September 2026
+Submission date: Not yet recorded
+Supervisor endorsement: Pending review
+Revision History
+Version 1.0, 23 September 2026. Initial formal requirements baseline, derived from governance and Deliverables 1 and 2 v2.0. Formal BR, FR and NFR identifiers begin here. Source files are unchanged. Internal requirements review is complete; stakeholder endorsement and implementation acceptance tests remain pending.
+
+Table of Contents
+
+
+Introduction
+Purpose and intended use
+This document establishes DailyKhata's formal requirements baseline for the project team, supervisor and assessors. It translates the approved problem, user needs and scope into eight business requirements, 69 functional requirements and 26 non-functional requirements. The catalogue supports architecture, database and interface design, implementation and acceptance testing. It specifies intended behaviour; it does not assert that the application has been built or tested. [G1-G5, D1, D2, A3]
+All 38 canonical scope capabilities are represented, including all 27 Must Have capabilities. Optional requirements retain their approved Should Have or Could Have status. The baseline is feasible as a bounded four-student integration project using existing OCR and language-model capabilities, subject to the dependency and acceptance-target reviews recorded later in this document.
+Project overview and problem
+DailyKhata is a personal expense management application primarily designed for Pakistani users who frequently deal with paper receipts, cash transactions and informal expense tracking. It reduces the effort required to maintain personal or household expense records through receipt digitisation, OCR, quick cash expense capture, manual expense entry, automatic categorisation, user confirmation and correction, a structured Chart of Accounts, transaction history, spending summaries, item-level price history, semantic product classification and an AI Financial Assistant.
+Paper receipts and unrecorded cash purchases leave personal and household expense histories incomplete. Manual upkeep makes consistent recording difficult. Users need low-effort capture and reliable ways to review and understand spending.
+Product boundary
+The primary users are homemakers and household budget managers, university students and salaried professionals in Pakistan. A single account holder records personal or household expenses. Small shopkeepers are secondary direct users for petty cash and supplier expenses. Family members may review information with the account holder or receive a user-exported summary; they do not gain household roles, invitations or collaborative editing rights. The system is mobile-first and targets ordinary Android-class devices. [D1, D2, G1]
+The current product combines reviewed receipt digitisation, manual and text-based cash entry, an expense ledger, internal accounting mappings, semantic product classification, item-level price history, summaries and a read-only AI Financial Assistant. Voice, bilingual localisation, export, custom labels, extra views and image archive remain optional. Detailed exclusions and future scope appear later and are not current requirements.
+Requirement conventions
+Table : Requirement identifiers and interpretation
+
+IDs are persistent. Later deliverables may elaborate them, attach design or test references and record status. Retired IDs must remain in change history and must not be reused. A substantive change records old wording, new wording, reason, source authority, affected IDs and reviewer decision. This document introduces no new major feature and makes no silent change to D1 or D2.
+Requirements engineering approach
+Sources and authority
+The workspace was recursively inventoried before writing. The current governance files, D1 v2.0 and D2 v2.0 were read completely, together with the five-page official D3 brief, original deliverables, task sheets, Design Thinking slides and supporting notes. The reference folder contains no additional research. No source code, raw survey dataset, interview transcript or observation log was available. The 17 input files recorded for this task remain byte-for-byte unchanged.
+Table : Source authority and use
+
+Elicitation and analysis
+D2 reports interviews, observation and existing-system examination. This D3 performs documentary analysis of those findings rather than claiming additional stakeholder work. Capture friction supports BR-001; difficulty reconstructing coherent histories supports BR-002 and BR-003. Product semantics, the full internal Chart of Accounts and assistant breadth also rely explicitly on the approved scope. The source chain remains visible even where fieldwork does not establish a capability. [D2, EV-01 to EV-07]
+Analysis separated outcomes from behaviour, decomposed receipt processing from review and commitment, and distinguished local category labels from categories and accounting accounts. Repeated concepts were consolidated: saved-data maintenance is defined once in the ledger group, then reused by summary, price and assistant requirements. Dependencies were checked so no Must Have requirement needs an optional capability. The internal model was checked before Word authoring for unique IDs, coverage, valid references, duplicate statements and priority conflicts.
+Classification and prioritisation
+Table : Priority rules inherited from governance
+
+BR-001 includes optional voice as an additional route to a core outcome. This does not make voice Must Have. Likewise, Should Have presentation outcomes can draw on core data without requiring optional screens for core assistant answers. Shared quality controls apply to optional functionality only when that functionality is implemented. NFR-COMP-002, the dedicated localisation quality requirement, is itself Should Have.
+Validation and traceability method
+The traceability chain is problem, stakeholder need, evidence or documentary authority, DR candidate, BR outcome, FR behaviour, NFR quality condition and acceptance test. Every FR identifies its source, scope, business outcome and quality links. The four traceability matrices provide reverse lookup. Validation here means requirements inspection and model checks; user trials, software tests, student verification and supervisor endorsement are planned acceptance activities, not completed research. [A3]
+Stakeholder and evidence foundation
+Canonical user profiles
+Table : Canonical personas inherited from D1 and D2
+
+Ayesha needs household visibility and receipt capture; Hamza needs a short cash-entry path; Bilal needs searchable monthly records. Usman reuses the expense workflow for petty cash and supplier purchases. Zubair is a secondary beneficiary of shared information, with age not recorded. These are design profiles, not five verified interview participants. Usman's canonical design age is 41 under DEC-01; the original D2 participant age of 46 remains an unresolved source discrepancy. Bilal and Zubair are not reported interviewees. [G3-G5, D1, D2]
+Other stakeholders and responsibilities
+Table : Stakeholder interests and requirements responsibilities
+
+Evidence register and limitations
+Table : Preserved D2 evidence register
+
+D1 also supplies the original assistant and target-market intent, especially for DR-08. The qualitative evidence supports design rationale, not market size, population prevalence or quantified benefit. No fabricated participant, survey result, quotation, benchmark or user test is included. The historical competitor comparison is not evidence about current products. The original statement about a customer paying is retained only as cash-capture context and never becomes sales or payment scope.
+Business requirements
+Business goals and catalogue
+The outcomes concern reduced recording effort, coherent records, spending understanding, product comparison, privacy and ordinary-device use. Optional outcomes improve presentation and recording habits. Success indicators below describe observable outcomes to evaluate, not claimed improvements already measured. The related scope and functional IDs make each outcome operational.
+Reduce recording effort
+BR-001 | Must Have DailyKhata shall enable the primary user groups to maintain expense records without transcribing every available receipt field or requiring a receipt for a cash purchase.
+Objective and rationale: Reduce repeated entry and omitted spending. Ayesha and Hamza report capture friction; receipt and no-receipt paths address different purchases.
+Stakeholders and source: Primary account holders; secondary shopkeeper. EV-01, EV-02, EV-03, EV-04, EV-05, EV-07; DR-01, DR-02, DR-03.
+Success indicator: Representative users can save one corrected receipt and one no-receipt expense; compare observed task effort with their existing method without claiming an unmeasured improvement.
+Scope and downstream behaviour: SC-04, SC-05, SC-06, SC-07, SC-08, SC-09, SC-10. FR-CAPTURE-001, FR-CAPTURE-002, FR-CAPTURE-003, FR-OCR-001, FR-OCR-002, FR-OCR-003, FR-OCR-004, FR-OCR-005, FR-OCR-006, FR-OCR-007, FR-REVIEW-001, FR-REVIEW-003, FR-TXN-001, FR-TXN-002, FR-VOICE-001, FR-VOICE-002.
+Maintain trustworthy expense records
+BR-002 | Must Have DailyKhata shall preserve a coherent and correctable personal expense history suitable for structured long-term financial records.
+Objective and rationale: Make recorded amounts and classifications dependable. Incorrect categories and scattered records undermine later analysis; user correction and accounting mappings support continuity.
+Stakeholders and source: All account holders; project team. EV-01, EV-02, EV-03, EV-04, EV-05, EV-06, EV-07; DR-01, DR-02, DR-04, DR-05, DR-06, DR-09.
+Success indicator: Reviewed records can be retrieved, corrected and deleted without inconsistent category totals, product histories or accounting records.
+Scope and downstream behaviour: SC-03, SC-07, SC-08, SC-09, SC-11, SC-12, SC-13, SC-14, SC-15, SC-16, SC-17, SC-18, SC-26. FR-REVIEW-001, FR-REVIEW-002, FR-TXN-003, FR-CAT-001, FR-CAT-002, FR-CAT-003, FR-CAT-004, FR-COA-001, FR-COA-002, FR-COA-003, FR-COA-004, FR-LEDGER-001, FR-LEDGER-002, FR-LEDGER-003, FR-LEDGER-004, FR-LEDGER-005, FR-LEDGER-006.
+Understand recorded spending
+BR-003 | Must Have DailyKhata shall enable account holders to explain their recorded spending and identify possible savings using their own expense history.
+Objective and rationale: Reduce the effort of assembling answers from separate records. The approved assistant and summaries extend the original need for spending visibility; they are not evidence of financial outcomes.
+Stakeholders and source: Primary account holders; family beneficiaries. EV-04, EV-06, EV-07; DR-06, DR-07, DR-08. DR-08 additionally retains original D1 [H1] intent.
+Success indicator: A user obtains an accurate category total, period comparison and data-grounded suggestion from a controlled ledger fixture.
+Scope and downstream behaviour: SC-19, SC-20, SC-22, SC-23, SC-24, SC-25, SC-27. FR-DASH-001, FR-DASH-002, FR-DASH-003, FR-AI-001, FR-AI-002, FR-AI-003, FR-AI-004, FR-AI-005, FR-AI-006, FR-AI-007, FR-AI-008, FR-AI-009, FR-AI-010.
+Support informed product comparison
+BR-004 | Must Have DailyKhata shall enable account holders to compare historical purchase prices while retaining differences between products, brands and quantities.
+Objective and rationale: Make recorded item prices useful for household decisions. A product-type grouping supports related-product analysis but cannot establish that different brands or packs are identical.
+Stakeholders and source: Household budget managers; other account holders. EV-01, EV-05, EV-06, EV-07; DR-01, DR-07, DR-08.
+Success indicator: Detergent fixtures preserve separate identities, allow comparable-unit comparisons and explain missing-unit limitations.
+Scope and downstream behaviour: SC-06, SC-21, SC-22, SC-24. FR-OCR-005, FR-PRODUCT-001, FR-PRODUCT-002, FR-PRODUCT-003, FR-PRICE-001, FR-PRICE-002, FR-AI-006.
+Protect personal financial information
+BR-005 | Must Have DailyKhata shall restrict access to personal expense information to its authorised account holder and the processing needed to deliver the requested service.
+Objective and rationale: Support trust in storing sensitive expense records. Privacy is an approved scope need; no new privacy interviews or certification claims are inferred.
+Stakeholders and source: All account holders; project team; service providers. EV-07; DR-08, DR-09.
+Success indicator: Cross-account access and assistant retrieval tests disclose no other account data; credential and storage controls pass inspection.
+Scope and downstream behaviour: SC-01, SC-23, SC-24, SC-27. FR-AUTH-001, FR-AUTH-002, FR-AUTH-003, FR-AUTH-004, FR-AI-002, FR-AI-009, FR-AI-011.
+Support ordinary smartphone use
+BR-006 | Must Have DailyKhata shall make the core expense workflows usable on an ordinary Android-class device, including understandable recovery from unavailable services.
+Objective and rationale: Avoid dependence on high-end devices or uninterrupted cloud processing. Low-effort recording requires readable review and visible failures; full offline operation is not core.
+Stakeholders and source: Primary account holders; secondary shopkeeper. EV-01, EV-05, EV-06, EV-07; DR-01, DR-04, DR-08, DR-09.
+Success indicator: Core task and recovery scenarios pass the defined device and usability acceptance protocol.
+Scope and downstream behaviour: SC-02, SC-05, SC-13, SC-24. FR-PROFILE-001, FR-PROFILE-002, FR-CAPTURE-003, FR-CAT-004, FR-AI-010.
+Adapt presentation and sharing
+BR-007 | Should Have DailyKhata shall support optional ways for account holders to understand and share their expense records in their preferred presentation.
+Objective and rationale: Improve fit through optional language, labels, views and export. D2 candidates and approved scope identify these as desirable extensions rather than minimum delivery conditions.
+Stakeholders and source: Account holders; family beneficiaries. EV-04, EV-06, EV-07; DR-10, DR-11.
+Success indicator: Implemented optional features preserve the same figures and classifications as the core ledger and pass their feature-specific checks.
+Scope and downstream behaviour: SC-28, SC-29, SS-03, SS-04, SS-05, SS-06. FR-CAPTURE-004, FR-CAT-005, FR-DASH-004, FR-DASH-005, FR-REPORT-001, FR-LOC-001, FR-LOC-002, FR-LOC-003.
+Support flexible recording habits
+BR-008 | Could Have DailyKhata shall provide optional support for expense-recording habits that need personal categories, temporary offline capture, reminders or household summaries.
+Objective and rationale: Allow limited personal adaptation after the core workflow is complete. These enhancements are scope-authorised Could Have features, not research-established commitments.
+Stakeholders and source: Account holders; family beneficiaries. EV-07; DR-12.
+Success indicator: Each selected enhancement passes its acceptance scenario without requiring shared accounts or altering the baseline priorities.
+Scope and downstream behaviour: SS-08, SS-09, SS-10, SS-11. FR-CAT-006, FR-REPORT-002, FR-OFFLINE-001, FR-REMIND-001.
+Business requirement analysis
+The first six outcomes define the minimum product purpose. BR-007 and BR-008 add optional benefits without changing the intended market. No requirement promises measured financial savings, user retention or a market share. A saving suggestion is useful only when its arithmetic and assumptions are visible; the user remains responsible for deciding what to do. An expense record can be internally coherent even when the user has not recorded all real-world spending, so the assistant must distinguish recorded spending from total actual spending.
+Functional requirements
+Shared workflow and data rules
+A capture route produces a draft. Extraction and interpretation propose values. The account holder reviews required fields, resolves inconsistent totals and confirms categories, then explicitly commits the expense. Only an active committed expense participates in summaries and price history. Every protected operation inherits the authentication boundary. The common actor, preconditions, trigger and rationale stated for each subsystem apply to its records; each requirement supplies its own behaviour, acceptance oracle and failure path.
+Table : Controlled D3 elaborations and interpretation rules
+
+These are D3 project-team elaborations of approved capabilities, not additional interview findings. Numerical and platform choices are proposed FYP acceptance boundaries to confirm before implementation. Any change to them must use the persistent IDs and change-control rule. None changes a source persona, capability priority or current-versus-future decision.
+Authentication and access
+Context: Identity establishes the account boundary used by every later workflow.
+Actor and preconditions: Unauthenticated visitor for registration and login; account holder for logout. Credentials are supplied through the application; protected data has an owner.
+Trigger and common flow: Register, sign in, sign out or request protected content. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Account registration
+FR-AUTH-001 | Must Have The system shall create a distinct user account from a valid, unused login identifier and accepted credentials.
+Trace and rationale: BR-005; SC-01; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Submitting an unused valid identifier creates one account; submitting the same identifier again creates none and returns a non-disclosing failure message.
+Alternative or failure: Invalid or duplicate input leaves no partial account.
+Dependencies and quality: No earlier functional service required; authentication infrastructure is needed. NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001.
+Login
+FR-AUTH-002 | Must Have The system shall establish an authenticated session only after successful credential verification.
+Trace and rationale: BR-005; SC-01; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Correct credentials open the account ledger; an incorrect password grants no session and does not disclose whether the account exists.
+Alternative or failure: Rejected credentials retain the sign-in screen with a generic explanation.
+Dependencies and quality: No earlier functional service required; authentication infrastructure is needed. NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001.
+Logout
+FR-AUTH-003 | Must Have The system shall terminate the current session when its user selects logout.
+Trace and rationale: BR-005; SC-01; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: After logout, replaying the old session against the ledger and assistant is rejected and protected screens require login.
+Alternative or failure: If the network is unavailable, local access ends immediately and the server session expires under the session policy.
+Dependencies and quality: No earlier functional service required; authentication infrastructure is needed. NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001.
+Authorised access boundary
+FR-AUTH-004 | Must Have The system shall authorise every protected operation against the current account identity.
+Trace and rationale: BR-005; SC-01, SC-27; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Account A cannot read, change, delete, export or query an object belonging to B, including by modifying its identifier.
+Alternative or failure: Unauthenticated or unauthorised requests return no protected payload.
+Dependencies and quality: No earlier functional service required; authentication infrastructure is needed. NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001.
+Profile and settings
+Context: Small persistent preferences reduce repeated setup without creating household roles.
+Actor and preconditions: Authenticated account holder. An account and session exist.
+Trigger and common flow: Open profile or settings and submit a change. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Basic profile
+FR-PROFILE-001 | Must Have The system shall allow the account holder to view and update a display name without changing the stable account identity.
+Trace and rationale: BR-006; SC-02; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Change a display name, reopen the profile and verify the new name and unchanged ownership of earlier records.
+Alternative or failure: An invalid or failed update preserves the previous value.
+Dependencies and quality: FR-AUTH-004. NFR-PERF-001, NFR-SEC-003.
+Basic settings
+FR-PROFILE-002 | Must Have The system shall persist the account holder's default summary month selection between authenticated sessions.
+Trace and rationale: BR-006; SC-02; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Select a supported month, sign out and back in, and verify that summaries use that month with its date range displayed.
+Alternative or failure: An invalid month is rejected; a new account defaults to the current calendar month.
+Dependencies and quality: FR-AUTH-004. NFR-PERF-001, NFR-SEC-003.
+Receipt capture
+Context: Image acquisition supplies the same review workflow regardless of input path.
+Actor and preconditions: Authenticated account holder and camera or file picker. A receipt image is available or can be photographed.
+Trigger and common flow: Select capture, upload, retry or an archived receipt. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Receipt photograph
+FR-CAPTURE-001 | Must Have The system shall accept a camera photograph as input to a receipt draft.
+Trace and rationale: BR-001; SC-04; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Grant permission and take a photograph; its preview is associated with a new unsaved receipt draft.
+Alternative or failure: Denied camera permission offers upload or manual entry without creating an expense.
+Dependencies and quality: FR-AUTH-004. NFR-COMP-001, NFR-USE-002, NFR-SEC-004.
+Receipt upload
+FR-CAPTURE-002 | Must Have The system shall accept a supported image file selected by the user as input to a receipt draft.
+Trace and rationale: BR-001; SC-04; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A valid JPEG or PNG within the declared limit opens a draft preview; a renamed executable or oversized image is rejected.
+Alternative or failure: Rejected files show the permitted formats and size, with a replacement or manual-entry path.
+Dependencies and quality: FR-AUTH-004. NFR-SEC-004, NFR-PRIV-002, NFR-PERF-003, NFR-REL-002.
+Processing states and retry
+FR-CAPTURE-003 | Must Have The system shall show the current receipt-processing state and permit retry after a recoverable failure.
+Trace and rationale: BR-001, BR-006; SC-05; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A controlled request passes through processing to review; a timeout shows failure and a retry creates no duplicate saved expense.
+Alternative or failure: Retry remains user-triggered; a failed attempt retains the in-session draft while the session remains open.
+Dependencies and quality: FR-AUTH-004. NFR-SEC-004, NFR-PRIV-002, NFR-PERF-003, NFR-REL-002.
+Receipt image archive
+FR-CAPTURE-004 | Should Have The system shall retain a receipt image linked to its saved expense when the image archive feature is enabled.
+Trace and rationale: BR-007; SS-06; DR-11; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Save an expense with its image and reopen it; only its account holder can view the corresponding image.
+Alternative or failure: An unavailable archived image is identified separately from the valid structured expense; deletion follows the retention rule.
+Dependencies and quality: FR-AUTH-004. NFR-SEC-003, NFR-PRIV-002, NFR-PRIV-003.
+OCR and structured extraction
+Context: Extraction proposes data; it does not establish a confirmed financial record.
+Actor and preconditions: OCR component acting for the authenticated account holder. A validated receipt image is attached to an in-session draft.
+Trigger and common flow: The user requests processing. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+OCR text preservation
+FR-OCR-001 | Must Have The system shall preserve the original OCR text separately from all user corrections and inferred values.
+Trace and rationale: BR-001; SC-05, SC-06; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: After processing a fixture and correcting an item name, the original extracted text remains retrievable in receipt review.
+Alternative or failure: An unreadable image produces an explicit extraction failure, never invented source text.
+Dependencies and quality: FR-CAPTURE-001, FR-CAPTURE-002. NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005.
+Merchant extraction
+FR-OCR-002 | Must Have The system shall propose the merchant from receipt text when it can identify one.
+Trace and rationale: BR-001; SC-06; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A fixture with a recognisable merchant shows that value as proposed; a fixture without one shows an unknown merchant.
+Alternative or failure: An uncertain merchant remains editable and is not required for manual fallback.
+Dependencies and quality: FR-CAPTURE-002. NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005.
+Date extraction
+FR-OCR-003 | Must Have The system shall propose a receipt date when available and flag ambiguous or missing dates for confirmation.
+Trace and rationale: BR-001; SC-06; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: An unambiguous printed date is proposed; ambiguous numeric dates and absent dates require explicit user selection or confirmation.
+Alternative or failure: The system does not silently replace an ambiguous receipt date with today's date.
+Dependencies and quality: FR-CAPTURE-002. NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005.
+Line item extraction
+FR-OCR-004 | Must Have The system shall construct reviewable line-item candidates from recognised purchase lines.
+Trace and rationale: BR-001; SC-06; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A controlled three-item extraction result displays three separately editable candidates and their corresponding source text.
+Alternative or failure: Unrecognised lines remain visible in original text for user correction; headers are not silently accepted as products.
+Dependencies and quality: FR-CAPTURE-002. NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005.
+Quantity and unit extraction
+FR-OCR-005 | Must Have The system shall associate recognised quantities and units with their line-item candidates without filling unknown values as inferred facts.
+Trace and rationale: BR-001, BR-004; SC-06; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A two-pack fixture retains count two and its pack size separately; a missing quantity remains unknown.
+Alternative or failure: Ambiguous units are marked for review and excluded from unit-price comparison until resolved.
+Dependencies and quality: FR-CAPTURE-002. NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005.
+Price extraction
+FR-OCR-006 | Must Have The system shall distinguish recognised unit prices from line totals in the receipt draft.
+Trace and rationale: BR-001; SC-06; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A line with quantity two, unit price 300 and line total 600 shows these in separate fields.
+Alternative or failure: Where price type is ambiguous, the draft requests correction rather than assigning the same value to both fields.
+Dependencies and quality: FR-CAPTURE-002. NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005.
+Receipt total extraction
+FR-OCR-007 | Must Have The system shall propose the payable receipt total from recognised receipt text.
+Trace and rationale: BR-001; SC-06; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A fixture containing subtotal, discount and payable total proposes the payable total; the raw source remains visible.
+Alternative or failure: Missing or conflicting totals prevent confirmation until the user supplies a valid total.
+Dependencies and quality: FR-CAPTURE-002. NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005.
+Receipt review and correction
+Context: The review boundary prevents uncertain machine output becoming an accepted expense.
+Actor and preconditions: Authenticated account holder. A draft or failed extraction is available.
+Trigger and common flow: Review, change or discard proposed values. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Draft review
+FR-REVIEW-001 | Must Have The system shall present extracted values and uncertainty indicators for review before an expense can be committed.
+Trace and rationale: BR-001, BR-002; SC-07; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A processed receipt opens review with merchant, date, items, quantities, prices, total and categories; no ledger row exists yet.
+Alternative or failure: Unavailable fields remain visibly unknown and required corrections are identified.
+Dependencies and quality: FR-OCR-001. NFR-USE-002, NFR-DATA-003, NFR-USE-001, NFR-COMP-001.
+Correction of extracted values
+FR-REVIEW-002 | Must Have The system shall allow the user to correct all extracted expense fields in the receipt draft.
+Trace and rationale: BR-002; SC-07; DR-01; EV-01, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Correct a merchant, date, quantity, price and total, add a missing item and remove a false item; review reflects every change while preserving source text.
+Alternative or failure: Invalid numeric or date values show field-specific errors and do not overwrite valid draft values.
+Dependencies and quality: FR-OCR-001. NFR-USE-002, NFR-DATA-003, NFR-USE-001, NFR-COMP-001.
+Discard and manual fallback
+FR-REVIEW-003 | Must Have The system shall allow the user to discard an unsaved receipt draft or continue it through manual entry.
+Trace and rationale: BR-001; SC-07, SC-08; DR-01, DR-02; EV-01, EV-02, EV-03, EV-04, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Cancel a draft and verify no expense exists; in a separate failed extraction choose manual entry and supply the missing fields.
+Alternative or failure: Leaving with unsaved changes requests confirmation before discarding them.
+Dependencies and quality: FR-OCR-001. NFR-USE-002, NFR-DATA-003, NFR-USE-001, NFR-COMP-001.
+Manual and text expense entry
+Context: No-receipt entry is core and cannot depend on optional speech or offline processing.
+Actor and preconditions: Authenticated account holder. The user knows the expense amount or can complete it manually.
+Trigger and common flow: Start manual entry, submit text or choose a past expense date. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Manual quick expense entry
+FR-TXN-001 | Must Have The system shall create a reviewable expense draft from an amount, expense date and short description without requiring a receipt.
+Trace and rationale: BR-001; SC-08; DR-02; EV-02, EV-03, EV-04, EV-05. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Enter Rs. 120, a valid date and rickshaw fare; review opens without a mandatory merchant, line-item list or image.
+Alternative or failure: Missing amount or description leaves the draft unsaved and identifies the needed field.
+Dependencies and quality: FR-AUTH-004. NFR-PERF-001, NFR-USE-001, NFR-USE-002, NFR-DATA-001, NFR-COMP-001.
+Text based cash expense entry
+FR-TXN-002 | Must Have The system shall interpret a short cash-expense description into proposed fields for user review.
+Trace and rationale: BR-001; SC-09; DR-02; EV-02, EV-03, EV-04, EV-05. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: The input paid 120 for rickshaw yesterday proposes amount 120, the previous local date and transport context before confirmation.
+Alternative or failure: An absent or ambiguous amount prompts clarification or manual completion instead of saving a guessed value.
+Dependencies and quality: FR-AUTH-004. NFR-PERF-001, NFR-USE-001, NFR-USE-002, NFR-DATA-001, NFR-COMP-001.
+Retrospective expense date
+FR-TXN-003 | Must Have The system shall allow a past expense date independently of the record's creation timestamp.
+Trace and rationale: BR-002; SC-03, SC-08, SC-09; DR-02, DR-06; EV-02, EV-03, EV-04, EV-05, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Enter an expense today dated last month; last month's totals include it and the creation timestamp remains today.
+Alternative or failure: Invalid dates are rejected; future-dated actual expenses are not committed in the baseline.
+Dependencies and quality: FR-AUTH-004. NFR-PERF-001, NFR-USE-001, NFR-USE-002, NFR-DATA-001, NFR-COMP-001.
+Optional voice expense entry
+Context: Voice supplies editable text and reuses the core confirmation path.
+Actor and preconditions: Authenticated account holder and speech-recognition component. Voice functionality is selected for implementation; microphone permission is available.
+Trigger and common flow: Start and stop voice capture, then accept or edit its transcript. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Voice transcription
+FR-VOICE-001 | Should Have The system shall produce an editable transcript from a user-initiated voice capture when voice entry is implemented.
+Trace and rationale: BR-001; SC-10; DR-03; EV-03, EV-05. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: With microphone permission, speak a cash expense and verify an editable transcript is displayed before interpretation.
+Alternative or failure: Denied permission or failed recognition offers text entry; no expense is automatically saved.
+Dependencies and quality: FR-TXN-002. NFR-PRIV-001, NFR-USE-002, NFR-REL-002.
+Voice expense draft
+FR-VOICE-002 | Should Have The system shall convert a user-reviewed voice transcript into the same reviewable draft used for text-based cash expense entry.
+Trace and rationale: BR-001; SC-10; DR-03; EV-03, EV-05. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Correct the recognised amount in a transcript and continue; the draft uses the corrected amount and awaits final confirmation.
+Alternative or failure: Incomplete transcripts use the text-entry clarification path.
+Dependencies and quality: FR-TXN-002, FR-VOICE-001. NFR-PRIV-001, NFR-USE-002, NFR-REL-002.
+Automatic categorisation
+Context: Category identity, local label and accounting account serve different purposes.
+Actor and preconditions: Authenticated account holder and category component. A draft description or line item is present.
+Trigger and common flow: Create or correct an expense classification, or select an optional label action. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Transaction category proposal
+FR-CAT-001 | Must Have The system shall propose an expense category for each new transaction using its available description or receipt information.
+Trace and rationale: BR-002; SC-11; DR-04; EV-05, EV-06. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A transport fixture receives a proposed transaction category; ambiguous input is marked uncertain and remains reviewable.
+Alternative or failure: If classification is unavailable, the user selects a category from the local list before saving.
+Dependencies and quality: FR-AUTH-004. NFR-DATA-003, NFR-USE-002, NFR-SEC-003.
+Line item category proposal
+FR-CAT-002 | Must Have The system shall propose an expense category independently for each receipt line item.
+Trace and rationale: BR-002; SC-11; DR-04; EV-05, EV-06. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A mixed receipt proposes different categories for rice and detergent without forcing all items into the receipt's primary category.
+Alternative or failure: Unclassified items remain flagged until the user selects their categories.
+Dependencies and quality: FR-AUTH-004. NFR-DATA-003, NFR-USE-002, NFR-SEC-003.
+Category confirmation and correction
+FR-CAT-003 | Must Have The system shall require user confirmation of proposed categories and persist any user corrections with the expense.
+Trace and rationale: BR-002; SC-12; DR-04; EV-05, EV-06. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Change detergent from Ration to Household Supplies and confirm; reopening preserves the correction and totals use Household Supplies.
+Alternative or failure: A later model response cannot silently replace a confirmed user category.
+Dependencies and quality: FR-AUTH-004. NFR-DATA-003, NFR-USE-002, NFR-SEC-003.
+Local category labels
+FR-CAT-004 | Must Have The system shall present the canonical local category labels to users independently of internal account identifiers.
+Trace and rationale: BR-002, BR-006; SC-13; DR-04; EV-05, EV-06. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Category selection includes Ration, Transport, Dining, Utilities, Healthcare, Education, Entertainment and Household Supplies without requiring account codes.
+Alternative or failure: An unknown machine label is not displayed as a substitute for a valid user-facing category.
+Dependencies and quality: FR-AUTH-004. NFR-DATA-003, NFR-USE-002, NFR-SEC-003.
+Custom category labels
+FR-CAT-005 | Should Have The system shall let an account holder customise a category's displayed label without changing its category identity or accounting mapping.
+Trace and rationale: BR-007; SS-03; DR-10; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Rename Ration to Groceries; historical totals and the Groceries Expense mapping are unchanged.
+Alternative or failure: An empty or conflicting label is rejected with a correction prompt.
+Dependencies and quality: FR-AUTH-004. NFR-DATA-003, NFR-USE-002, NFR-SEC-003.
+User created categories
+FR-CAT-006 | Could Have The system shall allow an account holder to create a personal expense category mapped to an existing appropriate expense account.
+Trace and rationale: BR-008; SS-08; DR-12; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Create a valid category, select its supported account mapping through familiar category choices and use it on an expense.
+Alternative or failure: No category can be saved without a valid mapping; this feature does not create arbitrary account classes.
+Dependencies and quality: FR-AUTH-004. NFR-DATA-003, NFR-USE-002, NFR-SEC-003.
+Chart of Accounts and accounting records
+Context: Stable accounts support structured expense storage without an accounting interface.
+Actor and preconditions: Internal accounting component acting for the account holder. A reviewed expense is ready for commitment with valid category allocations.
+Trigger and common flow: Validate or persist accounting references for a save, revision or deletion. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Internal account framework
+FR-COA-001 | Must Have The system shall maintain stable account identifiers, names, account types and active status in an internal Chart of Accounts.
+Trace and rationale: BR-002; SC-14; DR-05; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Inspect the account register: identifiers are unique and stable, each account has a recognised type, and the required expense and cash accounts exist.
+Alternative or failure: Retiring an account cannot orphan historical expense records; account administration is not a user bookkeeping workflow.
+Dependencies and quality: FR-CAT-004. NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001.
+Category account mapping
+FR-COA-002 | Must Have The system shall resolve every saved expense allocation to a valid accounting account through its category mapping.
+Trace and rationale: BR-002; SC-15; DR-05; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Ration resolves to Groceries Expense and Household Supplies resolves to Household Supplies Expense for both new and historical allocations.
+Alternative or failure: Missing or invalid mappings block commitment with a recoverable explanation.
+Dependencies and quality: FR-CAT-004. NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001.
+Accounting compatible storage
+FR-COA-003 | Must Have The system shall store each committed expense with stable identifiers and accounting allocations that reconcile to its payable total.
+Trace and rationale: BR-002; SC-16; DR-05; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Inspect a saved record: owner, expense date, creation time, PKR total, category allocations and account references are retrievable and allocations sum to the total.
+Alternative or failure: A reconciliation failure leaves no partially committed expense or allocation.
+Dependencies and quality: FR-CAT-004. NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001.
+Balanced journals where used
+FR-COA-004 | Must Have The system shall enforce equal total debits and credits for every committed journal wherever double-entry recording is implemented.
+Trace and rationale: BR-002; SC-16; DR-05; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: For cash groceries of Rs. 2500, the journal debits Groceries Expense 2500 and credits Cash 2500; an unbalanced journal is rejected.
+Alternative or failure: If double-entry is not selected, document that architectural decision and still pass allocation-reconciliation checks; do not label allocations as balanced journals.
+Dependencies and quality: FR-CAT-004. NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001.
+Semantic product classification
+Context: Semantic grouping supports comparison while preserving brand and pack identity.
+Actor and preconditions: Authenticated account holder and product-classification component. A receipt line item and its available source attributes exist.
+Trigger and common flow: Classify or correct a recorded product. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Separate product identity fields
+FR-PRODUCT-001 | Must Have The system shall preserve original text, corrected item name, product identity, brand, canonical product type, expense category and accounting classification as distinct attributes.
+Trace and rationale: BR-004; SC-22; DR-07; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Surf Excel 1kg and Bonus 1kg remain separate products and brands after both are classified as Laundry Detergent.
+Alternative or failure: An unknown brand or product identity remains unknown rather than inheriting another product's identity.
+Dependencies and quality: FR-OCR-004. NFR-DATA-003, NFR-DATA-002, NFR-SEC-003.
+Semantic product classification
+FR-PRODUCT-002 | Must Have The system shall propose a canonical product type for a line item without merging distinct product identities.
+Trace and rationale: BR-004; SC-22; DR-07; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Both detergent examples are grouped under Laundry Detergent for analysis while their separate histories remain available.
+Alternative or failure: Uncertain classifications are marked provisional and are not treated as confirmed exact matches.
+Dependencies and quality: FR-OCR-004. NFR-DATA-003, NFR-DATA-002, NFR-SEC-003.
+Semantic correction
+FR-PRODUCT-003 | Must Have The system shall allow the account holder to correct a product's inferred attributes and classification for the recorded line item.
+Trace and rationale: BR-004; SC-22; DR-07; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Correct a wrong brand or type and reopen the line; subsequent analysis uses the corrected values and unchanged original text.
+Alternative or failure: A correction cannot modify another account's products or silently rewrite unrelated historical purchases.
+Dependencies and quality: FR-OCR-004. NFR-DATA-003, NFR-DATA-002, NFR-SEC-003.
+Item level price history
+Context: Related-product comparison is useful only when quantities and provenance are visible.
+Actor and preconditions: Authenticated account holder. Recorded items have dates and available product attributes.
+Trigger and common flow: Open a product history or request comparison. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Item level price history
+FR-PRICE-001 | Must Have The system shall display a product's historical recorded prices with expense dates, quantities and source transactions.
+Trace and rationale: BR-004; SC-21; DR-07; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Save the same confirmed product on two dates at different prices; history shows both records linked to their transactions.
+Alternative or failure: Unknown product matches are identified as unresolved and are not silently merged into an exact-product history.
+Dependencies and quality: FR-PRODUCT-001, FR-LEDGER-001. NFR-DATA-001, NFR-DATA-002, NFR-DATA-003.
+Comparable product prices
+FR-PRICE-002 | Must Have The system shall compare prices of related products using equivalent quantities and compatible units where these are known.
+Trace and rationale: BR-004; SC-21, SC-22; DR-07; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A 1kg pack at Rs. 600 and 500g pack at Rs. 350 display Rs. 600/kg and Rs. 700/kg, retaining each brand and purchase date.
+Alternative or failure: Without compatible units, display recorded prices and a comparison limitation, with no cheapest-per-unit conclusion.
+Dependencies and quality: FR-PRODUCT-001, FR-LEDGER-001. NFR-DATA-001, NFR-DATA-002, NFR-DATA-003.
+Expense ledger and maintenance
+Context: The ledger is the authoritative source for all current financial views.
+Actor and preconditions: Authenticated account holder. For commitment, a valid reviewed draft exists; for maintenance, an owned saved expense exists.
+Trigger and common flow: Confirm, open, search, edit or delete an expense. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Confirmed transaction commitment
+FR-LEDGER-001 | Must Have The system shall commit one expense transaction only after its valid draft and categories are explicitly confirmed by the user.
+Trace and rationale: BR-002; SC-03, SC-12; DR-06, DR-04; EV-04, EV-05, EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Confirm a reviewed draft once; one stable transaction ID is returned and its allocations reconcile to the expense total.
+Alternative or failure: Validation failure or an interrupted save cannot create a partially saved ledger record.
+Dependencies and quality: FR-AUTH-004, FR-COA-003, FR-CAT-003. NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001.
+Transaction detail
+FR-LEDGER-002 | Must Have The system shall display a saved expense transaction and its recorded line items, classifications and source information to its owner.
+Trace and rationale: BR-002; SC-17; DR-06; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Open a mixed receipt from history and verify its date, merchant, total, items, corrected categories and original text where available.
+Alternative or failure: A missing or inaccessible record shows an unavailable result without leaking other users' data.
+Dependencies and quality: FR-AUTH-004, FR-COA-003. NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001.
+Transaction history
+FR-LEDGER-003 | Must Have The system shall list the current account's saved expenses in descending expense-date order with a stable tie-break order.
+Trace and rationale: BR-002; SC-17; DR-06; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Save expenses on two dates and several on the same date; repeated listing and pagination return each active transaction once.
+Alternative or failure: An empty ledger displays an explicit empty state and an entry action.
+Dependencies and quality: FR-AUTH-004, FR-COA-003. NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001.
+Search and filtering
+FR-LEDGER-004 | Must Have The system shall return the account holder's expenses matching combined date-range, category and text criteria.
+Trace and rationale: BR-002; SC-18; DR-06; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Filter a fixture by month and category and search merchant or item text; results include only matching owned expenses and clearing filters restores history.
+Alternative or failure: Invalid date ranges request correction; no matches is distinguished from loading failure.
+Dependencies and quality: FR-AUTH-004, FR-COA-003. NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001.
+Edit saved transaction
+FR-LEDGER-005 | Must Have The system shall replace a saved expense's editable values through a validated user-confirmed revision that updates its dependent records.
+Trace and rationale: BR-002; SC-26; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Change a price, date and category; ledger detail, monthly totals, price history and accounting allocations all reflect the same revision.
+Alternative or failure: A stale simultaneous edit requests reload or reconciliation instead of silently overwriting a later revision.
+Dependencies and quality: FR-AUTH-004, FR-COA-003. NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001.
+Delete saved transaction
+FR-LEDGER-006 | Must Have The system shall remove a user-confirmed deleted expense from active records and all derived spending and price results.
+Trace and rationale: BR-002; SC-26; DR-09; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Delete a selected expense, refresh dashboard, history, price comparison and assistant query; none counts the deleted expense.
+Alternative or failure: Cancellation changes nothing; failure identifies that deletion did not complete and does not claim success.
+Dependencies and quality: FR-AUTH-004, FR-COA-003. NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001, NFR-PRIV-003.
+Dashboard and spending summaries
+Context: All displays use one allocation rule so category and transaction totals reconcile.
+Actor and preconditions: Authenticated account holder. A period is selected; an empty ledger is also valid.
+Trigger and common flow: Open the dashboard or select a period or optional view. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Category spending totals
+FR-DASH-001 | Must Have The system shall calculate category spending from active expense allocations for a selected date range without double counting receipt totals.
+Trace and rationale: BR-003; SC-19; DR-06; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A receipt with Ration 100 and Household Supplies 50 contributes 100 and 50 respectively, with combined spending 150 rather than 300.
+Alternative or failure: Unreconciled drafts do not contribute to category totals.
+Dependencies and quality: FR-LEDGER-001. NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001.
+Monthly spending summary
+FR-DASH-002 | Must Have The system shall summarise active expenses within the selected calendar month using expense dates.
+Trace and rationale: BR-003; SC-20; DR-06; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A month with expenses of 100, 250 and 150 shows total 500 and transaction count three, excluding adjacent dates and deleted records.
+Alternative or failure: An empty month shows zero recorded spending and states that no expenses are recorded.
+Dependencies and quality: FR-LEDGER-001. NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001.
+Dashboard overview
+FR-DASH-003 | Must Have The system shall display the selected month's total, category summary and recent expense transactions in a dashboard.
+Trace and rationale: BR-003; SC-25; DR-06; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Load a fixture and verify displayed values match the monthly summary, category totals and newest transaction records.
+Alternative or failure: If data cannot load, the dashboard shows an error or a labelled older snapshot, never an unexplained zero.
+Dependencies and quality: FR-LEDGER-001. NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001.
+Spending visualisations
+FR-DASH-004 | Should Have The system shall present a simple labelled category-spending visualisation for the selected period when this optional view is implemented.
+Trace and rationale: BR-007; SS-04; DR-11; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Each plotted category value matches the category-total fixture, and an equivalent text value is available.
+Alternative or failure: An empty period shows an empty state rather than a misleading full chart.
+Dependencies and quality: FR-LEDGER-001. NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001.
+Month comparison view
+FR-DASH-005 | Should Have The system shall display a dedicated comparison of two selected calendar months when this optional view is implemented.
+Trace and rationale: BR-007; SS-05; DR-11; EV-04, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Totals of 8400 and 5900 show an absolute difference of 2500 with both month labels.
+Alternative or failure: When the earlier total is zero, percentage change is marked undefined instead of dividing by zero.
+Dependencies and quality: FR-LEDGER-001. NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001.
+AI Financial Assistant
+Context: Conversational interpretation relies on bounded retrieval and verified calculations.
+Actor and preconditions: Authenticated account holder, retrieval component and selected language model. The session is authorised; records may be present, empty or incomplete.
+Trigger and common flow: Submit a financial question or follow-up. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Conversational financial query
+FR-AI-001 | Must Have The system shall accept natural-language financial questions and maintain the current conversation context for follow-up questions.
+Trace and rationale: BR-003; SC-23, SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Ask for this month's Dining total and then compare it with last month; the second question retains the Dining context and states the resolved periods.
+Alternative or failure: Ambiguous category or period references prompt clarification rather than a silent assumption presented as fact.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Authorised transaction lookup
+FR-AI-002 | Must Have The AI Financial Assistant shall answer transaction lookup questions using only the current account's authorised active records.
+Trace and rationale: BR-003, BR-005; SC-23, SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Ask for a merchant purchase in a date range; the answer identifies the matching records and ignores an identical record owned by another user.
+Alternative or failure: No match is stated as no recorded match, not proof that the purchase did not occur.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Spending and category summaries
+FR-AI-003 | Must Have The AI Financial Assistant shall answer summary and category-analysis questions with totals computed from the applicable expense records.
+Trace and rationale: BR-003; SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: For the Rs. 500 monthly fixture, the answer reports 500, the selected period and the contributing categories consistently with the dashboard.
+Alternative or failure: Missing records or unavailable retrieval are disclosed; the assistant does not invent a total.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Period comparison and explanation
+FR-AI-004 | Must Have The AI Financial Assistant shall explain changes between requested periods using their recorded totals and category contributions.
+Trace and rationale: BR-003; SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Dining totals of 8400 and 5900 yield a 2500 increase; the answer names both periods and relates the change to recorded category amounts.
+Alternative or failure: Unequal or incomplete periods are disclosed; zero baselines do not produce a defined percentage increase.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Recurring spending and patterns
+FR-AI-005 | Must Have The AI Financial Assistant shall identify repeated recorded expenses and describe their observed pattern with supporting dates and amounts.
+Trace and rationale: BR-003; SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A fixture with three monthly payments to one merchant yields a repeated-payment observation citing those entries.
+Alternative or failure: The answer labels the observation as historical, does not promise future recurrence and creates no scheduled transaction.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Semantic product price answers
+FR-AI-006 | Must Have The AI Financial Assistant shall answer product-price questions using separate product identities, semantic types and comparable historical quantities.
+Trace and rationale: BR-003, BR-004; SC-22, SC-24; DR-08, DR-07; EV-06, EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Ask which detergent was cheaper for me using the Rs. 600/kg and Rs. 700/kg fixture; the answer names the brands, dates, units and supported comparison.
+Alternative or failure: Unknown quantities or identities produce a limitation rather than an unsupported cheapest-product claim.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Unusually high recorded spending
+FR-AI-007 | Must Have The AI Financial Assistant shall explain comparatively high recorded spending using an explicit comparison period or category basis.
+Trace and rationale: BR-003; SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Ask where spending was high; the answer identifies the chosen baseline, shows the relevant totals and describes the difference.
+Alternative or failure: Without a suitable baseline the assistant requests one or says the available records do not support the comparison.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Personalised saving suggestions
+FR-AI-008 | Must Have The AI Financial Assistant shall provide optional general saving suggestions linked to the user's recorded spending and stated assumptions.
+Trace and rationale: BR-003; SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: For Dining 8400 versus 5900, the answer may suggest returning to the earlier level and calculates potential reduction 2500, explicitly as a suggestion.
+Alternative or failure: The assistant does not guarantee savings, fabricate preferences or propose executing a payment or investment transaction.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Grounded answer presentation
+FR-AI-009 | Must Have The AI Financial Assistant shall distinguish recorded facts, derived calculations and suggestions and identify the data period or supporting records for financial claims.
+Trace and rationale: BR-003, BR-005; SC-24, SC-27; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A test answer separates the recorded totals, their arithmetic difference and a suggested action; each numeric claim is reproducible from authorised records.
+Alternative or failure: If the service cannot substantiate a claim, it omits or qualifies that claim rather than presenting it as a fact.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Missing data and service failure
+FR-AI-010 | Must Have The AI Financial Assistant shall state when incomplete data or an unavailable service prevents a supported answer.
+Trace and rationale: BR-003, BR-006; SC-24; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: An empty ledger returns an insufficient-records explanation; a provider timeout returns a retryable service error without a fabricated answer.
+Alternative or failure: Previously saved expenses remain accessible through ordinary history and summaries.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Read only assistant authority
+FR-AI-011 | Must Have The AI Financial Assistant shall remain read-only with respect to expense records, payment systems and external financial accounts.
+Trace and rationale: BR-005; SC-24, SC-27; DR-08; EV-07. Original D1 [H1] also supports assistant intent. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Prompts to delete expenses, move money or access a bank account cause no state change and explain the unsupported action.
+Alternative or failure: Instructions embedded in receipt text cannot expand the assistant's data access or action permissions.
+Dependencies and quality: FR-AUTH-004, FR-LEDGER-001, FR-PRICE-002, FR-DASH-001. NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001.
+Optional export
+Context: A user-controlled file provides sharing without shared household accounts.
+Actor and preconditions: Authenticated account holder. The requested optional export capability is implemented and a selection is defined.
+Trigger and common flow: Request an export of owned records or household summary. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Expense export
+FR-REPORT-001 | Should Have The system shall export the account holder's selected expense records in at least one of CSV or PDF when export is implemented.
+Trace and rationale: BR-007; SC-29; DR-10; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Export a selected period; the file identifies the period and includes date, description, category and amount with totals matching the same ledger selection.
+Alternative or failure: A failed export shows failure and provides no misleading empty success file; both formats are not required.
+Dependencies and quality: FR-LEDGER-004. NFR-SEC-003, NFR-DATA-001, NFR-DATA-002.
+Household summary export
+FR-REPORT-002 | Could Have The system shall export an account-holder-selected household expense summary when this optional feature is implemented.
+Trace and rationale: BR-008; SS-11; DR-12; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Select household expenses or a household-labelled period and export category totals; the summary identifies the selection and matches those records.
+Alternative or failure: Sharing remains an explicit action by the account holder; no invitation, recipient account or permission system is created.
+Dependencies and quality: FR-LEDGER-004, FR-REPORT-001. NFR-SEC-003, NFR-DATA-001, NFR-DATA-002.
+Optional English and Urdu localisation
+Context: Translation changes presentation, never canonical category identity or financial arithmetic.
+Actor and preconditions: Authenticated account holder; bilingual reviewer during validation. The relevant optional localisation features are implemented.
+Trigger and common flow: Select a language or ask a question in Urdu. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Language selection
+FR-LOC-001 | Should Have The system shall allow selection of English or Urdu interface text when bilingual localisation is implemented.
+Trace and rationale: BR-007; SC-28; DR-10; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Switch language and reopen the application; the chosen language is retained across the supported core screens without altering amounts or category identities.
+Alternative or failure: Missing translations use an explicit English fallback and are recorded as localisation defects for acceptance review.
+Dependencies and quality: FR-PROFILE-001, FR-AI-001. NFR-COMP-002, NFR-DATA-004, NFR-USE-003.
+Urdu presentation
+FR-LOC-002 | Should Have The system shall render Urdu interface content with appropriate right-to-left layout while preserving readable numbers and product names when Urdu is implemented.
+Trace and rationale: BR-007; SC-28; DR-10; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Inspect receipt review, history and assistant screens with mixed Urdu, Latin product names and PKR amounts; text remains legible and field associations are correct.
+Alternative or failure: Unsupported rendering is identified as an unpassed optional feature, not described as validated Urdu support.
+Dependencies and quality: FR-PROFILE-001, FR-AI-001. NFR-COMP-002, NFR-DATA-004, NFR-USE-003.
+Urdu assistant interaction
+FR-LOC-003 | Should Have The AI Financial Assistant shall support Urdu questions and understandable Urdu answers for its core query types when Urdu interaction is implemented.
+Trace and rationale: BR-007; SC-28; DR-10; EV-06, EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: A bilingual reviewer checks equivalent English and Urdu questions against the same ledger fixture; amounts, periods and category meanings agree.
+Alternative or failure: An unsupported question or translation failure uses a clear fallback and does not change the underlying financial result.
+Dependencies and quality: FR-PROFILE-001, FR-AI-001. NFR-COMP-002, NFR-DATA-004, NFR-USE-003.
+Optional offline drafts
+Context: Only a reviewed committed expense enters financial summaries.
+Actor and preconditions: Authenticated account holder with an established local session. Offline draft support is implemented and local protected draft storage is available.
+Trigger and common flow: Create a draft without connectivity and later reconnect. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Offline expense drafts
+FR-OFFLINE-001 | Could Have The system shall retain manual or text expense drafts locally for later review and commitment when offline draft entry is implemented.
+Trace and rationale: BR-008; SS-09; DR-12; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: In flight mode create a draft, restart, reconnect and confirm it; exactly one owned expense is committed after review.
+Alternative or failure: A queued draft is visibly unsaved and never contributes to spending totals before successful commitment.
+Dependencies and quality: FR-TXN-001, FR-LEDGER-001. NFR-PRIV-002, NFR-REL-001, NFR-SEC-003.
+Optional expense reminders
+Context: A recording prompt does not implement recurring expense generation.
+Actor and preconditions: Account holder and device notification service. Reminder support is implemented.
+Trigger and common flow: Enable, change or disable a reminder. The specific requirement below defines the observable result; invalid operations follow its failure path and do not imply a successful save.
+Expense reminder
+FR-REMIND-001 | Could Have The system shall allow an account holder to enable or disable a local reminder to record expenses when reminders are implemented.
+Trace and rationale: BR-008; SS-10; DR-12; EV-07. This behaviour implements the subsystem purpose above and the linked business outcome.
+Acceptance and expected result: Enable a reminder for a test time and receive one notification; disable it and verify no later notification is scheduled.
+Alternative or failure: Denied notification permission is explained; reminders create no expense transaction automatically.
+Dependencies and quality: FR-AUTH-004. NFR-USE-002, NFR-PRIV-002.
+Dependency references identify service contracts rather than mandatory screen order. OCR can receive a camera photograph or an uploaded image. Product and assistant records reuse the authoritative ledger and calculation contracts. Optional features never sit on the dependency path needed to complete the Must Have capture-to-summary workflow.
+Non functional requirements
+Measurement conditions and status
+All numerical thresholds, test-set sizes, device versions, session limits and retention intervals in this section are Proposed acceptance targets for the FYP. They were selected through requirements analysis, not measured in existing fieldwork. Students and supervisor should confirm them using an early pilot. They become delivery gates when this baseline is accepted; any revised target requires a recorded change rather than a silent relaxation. All described tests remain to be executed.
+Table : Acceptance environments and fixtures
+
+Performance measurements separate the application's processing time, external provider latency and total visible waiting time. A timeout is a bounded failure response, not a promise of successful OCR or AI completion in 60 seconds. The controlled calculation suite verifies defined answers; it cannot establish perfect general language-model accuracy. Supported-receipt fidelity is measured before correction, while successful end-to-end recording also requires a usable correction path.
+Performance
+Ordinary interaction response
+NFR-PERF-001 | Must Have The application shall acknowledge a tap, navigation request or save action within one second in at least 19 of 20 trials on environment T1, excluding completion of external processing.
+Source and rationale: SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Instrument input and visible feedback timestamps across entry, review and history; acknowledgement can be a loading state and must not falsely indicate completion.
+Ledger query response
+NFR-PERF-002 | Must Have The system shall display search results and dashboard summaries within three seconds in at least 19 of 20 requests under T1 with the capacity fixture T2.
+Source and rationale: SC-18, SC-20, SC-25, SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Measure from request initiation to complete visible result, including the test network; report cold and warm requests separately and all failures.
+Bounded cloud waiting
+NFR-PERF-003 | Must Have The system shall display processing feedback within one second and a retryable timeout state by 60 seconds for an OCR or assistant request that has not completed.
+Source and rationale: SC-05, SC-24; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Use a delayed provider stub and verify feedback and timeout deadlines; record application, provider and end-to-end times separately during live trials. No universal successful cloud-response duration is promised.
+Security
+Password protection
+NFR-SEC-001 | Must Have The system shall store no plaintext or reversibly encrypted passwords and shall use salted adaptive password hashing where it manages passwords itself.
+Source and rationale: SC-01, SC-27; approved scope [G1, EV-07] and D2 quality expectations. External guidance is supporting security practice, not a new stakeholder finding. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect database and authentication configuration against documented current password-storage guidance [X1]; equivalent managed authentication must document its credential boundary.
+Transport and secrets
+NFR-SEC-002 | Must Have The system shall protect remote financial-data communication with certificate-validated TLS and keep service secrets outside distributed clients and source control.
+Source and rationale: SC-27; approved scope [G1, EV-07] and D2 quality expectations. External guidance is supporting security practice, not a new stakeholder finding. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect remote endpoints and deployment configuration; attempt invalid-certificate communication and scan the deliverable repository and client package for configured service secrets.
+Object authorisation
+NFR-SEC-003 | Must Have The system shall reject every cross-account access attempt in the T3 authorisation matrix at the server or equivalent trusted data boundary.
+Source and rationale: SC-27; approved scope [G1, EV-07] and D2 quality expectations. External guidance is supporting security practice, not a new stakeholder finding. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Test direct identifiers, lists, uploads, exports, product history and assistant retrieval for two accounts; every unauthorised request returns no protected data. Client-only filtering is insufficient [X2].
+Upload controls
+NFR-SEC-004 | Must Have The system shall accept only verified JPEG and PNG receipt images of at most 10 MiB and shall reject invalid content before OCR processing.
+Source and rationale: SC-04, SC-27; approved scope [G1, EV-07] and D2 quality expectations. External guidance is supporting security practice, not a new stakeholder finding. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Test extension, detected content, corrupt images, double extensions and size limits; confirm protected storage names do not enable executable public retrieval [X3].
+Session protection
+NFR-SEC-005 | Must Have The system shall expire an inactive session after 30 minutes and an active session after 24 hours, and shall throttle repeated failed logins after five failures within 15 minutes per account or equivalent non-enumerating control.
+Source and rationale: SC-01, SC-27; approved scope [G1, EV-07] and D2 quality expectations. External guidance is supporting security practice, not a new stakeholder finding. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Use controlled clocks and repeated failures; verify expiry, generic errors and logout revocation. The throttle must not reveal account existence; its recovery interval is documented as 15 minutes.
+Privacy
+Service data minimisation
+NFR-PRIV-001 | Must Have The system shall transmit to each external processor only the receipt content or authorised financial subset required for the requested operation and shall explain that processing before first use.
+Source and rationale: SC-27; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect OCR and assistant payloads on T3 fixtures; no passwords, other-user data or unrelated receipt archive is sent. Record selected provider retention and training settings before deployment.
+Protected storage and logs
+NFR-PRIV-002 | Must Have The system shall restrict stored expenses, images, local credentials and diagnostic logs through authenticated storage controls and shall exclude raw financial content and tokens from routine logs.
+Source and rationale: SC-27; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect storage permissions and device credential storage; trigger failures and verify logs contain status and opaque references rather than receipt text, prompts or credentials. Document encryption-at-rest configuration for server financial storage.
+Deletion retention boundary
+NFR-PRIV-003 | Must Have The system shall remove a confirmed deleted expense from active retrieval before reporting success and erase its live structured content and associated retained image within 24 hours.
+Source and rationale: SC-26, SC-27; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect active and live storage at deletion and after 24 hours; any protected backup containing the record expires within 30 days and cannot be queried by the assistant. Document and test the deletion queue with a controlled clock.
+Usability
+Core task completion
+NFR-USE-001 | Must Have The system shall allow at least four of five representative trial users to complete manual entry, receipt correction and transaction lookup without facilitator intervention after a brief introduction.
+Source and rationale: SC-08, SC-07, SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Recruit across the three primary groups, record task outcomes and assistance; use consented trial data. This is a proposed acceptance target, not completed testing or a population claim.
+Correction and error clarity
+NFR-USE-002 | Must Have The system shall identify the affected field and a recovery action for every invalid-input and service-error case in the specified acceptance suite.
+Source and rationale: SC-07, SC-12, SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect amount, date, category, extraction and network failures; drafts retain valid inputs and no error screen relies only on a code or colour.
+Mobile readability
+NFR-USE-003 | Must Have The system shall present core entry, review, history and assistant controls without horizontal page scrolling at a 360 CSS-pixel-equivalent viewport and 150 percent text scaling.
+Source and rationale: SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect T1 screenshots and interact with all controls; tables may use an explicit contained scroll region, but totals and confirmation controls remain reachable and labelled.
+Reliability
+Atomic save and retry
+NFR-REL-001 | Must Have The system shall leave either one complete committed expense or no committed expense after each save interruption, and repeated submission of the same save request shall create no duplicates.
+Source and rationale: SC-03, SC-16; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inject failure before, during and after commitment, then retry the same operation identifier; count expenses and allocations and verify response matches the committed outcome.
+Service failure recovery
+NFR-REL-002 | Must Have The system shall preserve already committed expense access when OCR or assistant processing fails and shall expose a user-triggered retry or manual-entry recovery path.
+Source and rationale: SC-05, SC-24, SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Disable each external dependency separately; history and existing summaries still work when their own data service is available, and no fabricated result replaces the failed operation.
+Data integrity
+Money and allocation integrity
+NFR-DATA-001 | Must Have The system shall represent PKR money exactly to two decimal places and reconcile category allocations to each expense total with zero difference after documented rounding.
+Source and rationale: SC-16, SC-19; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Run mixed-item, discount and rounding fixtures; compare stored minor-unit or exact-decimal totals, category sums and displayed values. Binary floating-point approximations must not create monetary discrepancies.
+Revision consistency
+NFR-DATA-002 | Must Have The system shall make all active ledger, summary, price-history and assistant retrieval results reflect a confirmed revision or deletion before the next fresh query returns.
+Source and rationale: SC-21, SC-26; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Edit and delete fixtures, then query each dependent view; invalidate stale caches or label an older snapshot explicitly. An answer completed from a prior revision must be marked stale and refreshed.
+Classification and provenance integrity
+NFR-DATA-003 | Must Have The system shall preserve valid stable references and source provenance across every category, account and product correction in the acceptance suite.
+Source and rationale: SC-12, SC-14, SC-15, SC-22; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Rename labels and revise inferred attributes; confirmed category mappings and original text remain intact and no record has a dangling account, category or owner reference.
+Grounded financial calculations
+NFR-DATA-004 | Must Have The AI Financial Assistant shall reproduce all expected numeric results in the controlled T4 query suite and shall abstain or qualify when its authorised records do not support the requested conclusion.
+Source and rationale: SC-24; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Compare summary, difference, unit-price and zero-baseline answers with deterministic expected results; repeat each query three times. This finite-suite criterion is not a claim of perfect accuracy on arbitrary questions.
+Receipt extraction fidelity
+NFR-DATA-005 | Must Have The system shall correctly propose at least 85 percent of legible payable totals and at least 70 percent of annotated purchase lines on the 20-receipt T5 fixture before user correction.
+Source and rationale: SC-05, SC-06; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Compare output with independently checked manual annotations; a correct purchase line contains its readable item name and line total. Report merchant, date and quantity accuracy separately on fields actually present, all denominators, and unreadable-case failures. These are proposed pilot targets for the bounded printed-receipt set, not universal OCR guarantees.
+Compatibility and localisation quality
+Android compatibility
+NFR-COMP-001 | Must Have The system shall complete the core acceptance workflows on an Android 11-class device with 4 GB RAM and on one newer Android version using the selected supported deployment mode.
+Source and rationale: SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Record actual device, OS, viewport and browser or application build; use a physical baseline device where available and disclose emulator-only evidence until physical validation is completed.
+Localisation quality
+NFR-COMP-002 | Should Have The system shall pass bilingual review of all translated core-screen strings and mixed-direction layouts included in an implemented Urdu release.
+Source and rationale: SC-28; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Review English and Urdu for equivalent meaning, legible numbers and product names, RTL field associations and no untranslated required navigation labels; record reviewer and screenshots.
+Maintainability
+Interface separation
+NFR-MAINT-001 | Must Have The system shall document replaceable interfaces for OCR, assistant retrieval and persistent storage, with deterministic test substitutes for unavailable external services.
+Source and rationale: SC-05, SC-24, SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: A team member runs receipt and assistant acceptance fixtures using substitute providers without changing ledger business rules; interface inputs, outputs and error states are documented.
+Requirements and regression records
+NFR-MAINT-002 | Must Have The project shall retain an implementation and test reference for every delivered formal requirement ID and rerun affected integrity and authorisation checks after changes.
+Source and rationale: SC-16, SC-26, SC-27; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Inspect the delivery traceability register, versioned configuration and test results; deferred optional IDs have an explicit status and must not be silently deleted.
+Academic capacity
+Bounded academic capacity
+NFR-SCAL-001 | Must Have The system shall complete a 20-minute mixed read and write trial for 10 concurrent test accounts with 1000 expenses per account without lost or cross-account records.
+Source and rationale: SC-03, SC-30; approved scope [G1, EV-07] and D2 quality expectations. This condition constrains the linked functional behaviours in the traceability matrix.
+Verification: Use T2 load with one request per account every five seconds, including 20 percent writes; reconcile all confirmed totals and report latency and resource use. This is a proposed academic capacity boundary, not a production-scale promise.
+No uptime percentage, million-user scale, banking-grade security claim or vendor-specific stack is required. Protected financial storage and correct calculations are mandatory; the selected implementation must demonstrate them in the defined finite tests. If the team cannot meet a proposed target, the result is a documented acceptance issue requiring review, not permission to remove its underlying Must Have capability.
+Requirement prioritisation
+Table : Catalogue totals by priority
+
+Implement and test one complete Must Have path first: authenticate, capture or enter, review, classify, reconcile, save, retrieve and summarise. Extend this path with product history and the assistant without postponing those core capabilities into optional scope. Optional voice and localisation can be evaluated independently once their shared core contracts work. Defer optional work explicitly if it threatens completion of the Must Have baseline.
+Scope aliases are unchanged: SS-01 means SC-10, SS-02 means SC-29 and SS-07 means SC-28. They are traceability aliases and are not additional counted capabilities. Dedicated comparison views are Should Have; conversational period comparisons remain Must Have. Automatic recurring transaction creation, predictive anomaly detection and advanced autonomous recommendations remain future scope.
+Requirements traceability
+Evidence to formal requirements
+The following matrix preserves D2 candidate provenance. EV descriptions are defined in the evidence register. The DR-08 row additionally retains original D1 [H1]. NFR lists are the union of quality links for the row's functional requirements; their exact functional applicability is given in the functional-to-NFR matrix. Scope authority [G1] applies to all rows without being misrepresented as an interview. Repeated evidence links are deliberate many-to-many traceability.
+
+Table : Evidence and D2 candidates traced to formal requirements
+
+
+Business to functional requirements
+Table : Business outcomes and supporting functional requirements
+
+Functional to quality requirements
+Table : Functional requirements and applicable quality conditions
+
+Scope to formal requirements
+Table : Complete approved scope coverage
+
+All 38 scope capabilities have at least one formal requirement. SC-30 is primarily a quality capability, so its direct coverage is chiefly through device, usability, performance and capacity NFRs. Those NFRs constrain the core functional workflows through the preceding matrix. No feature disappears merely because it is represented as a quality requirement.
+Assumptions constraints and dependencies
+Assumptions
+Table : Assumptions and consequences if false
+
+Constraints
+The project is a four-student BS Computer Science FYP at Beaconhouse National University for academic year 2026-2027 under Nouman Ali. The approved scope, single-account boundary and existing delivery priorities constrain implementation. No exact development budget or confirmed submission deadline is established for D3. The team must select a financially feasible deployment during architecture work; this document does not invent a budget ceiling or a semester delivery schedule.
+The interface is oriented to personal and household expenses, not journal-entry operators. The baseline currency is PKR and the initial interface can be English. Full English and Urdu localisation is Should Have. Privacy, source provenance, corrected categories and coherent monetary totals are constraints on every implementation choice. No vendor, programming language, mobile framework or database is mandated.
+Technical dependencies
+Table : Dependency contracts and acceptance evidence
+
+Out of scope
+Direct bank integration; automatic debit-card or credit-card synchronisation; Easypaisa and JazzCash transaction integration; open banking; payment processing; money transfers; inventory management; point-of-sale functionality; payroll; enterprise ERP; complete SME accounting; tax filing; investment management; credit scoring; fraud-detection infrastructure; commercial banking functionality; enterprise multi-tenant organisation management; banking-grade regulatory certification; production infrastructure for millions of concurrent users; arbitrary third-party financial integrations.
+These exclusions apply to the current delivery. Internal expense-account mappings do not imply payroll, commercial accounting or tax filing. An assistant that explains recorded spending does not control financial accounts. A shopkeeper's expense entry does not create inventory, sales or payment-processing functionality.
+Future scope
+Bank transaction importing; wallet integrations; shared household accounts; collaborative budgeting; business accounting features; inventory; POS; recurring expenses; budgeting goals; predictive analytics; anomaly detection; advanced financial recommendations; deeper Urdu support; additional languages; multi-currency support; retailer integrations; e-receipt ingestion.
+Future work requires a new approved scope decision and traceability update. Analysis of repeated recorded expenses is currently supported; creating recurring expenses is future work. Descriptive observations about high recorded spending are current; predictive anomaly infrastructure is future work. Potential deeper Urdu support is distinct from the currently optional bilingual interface and Urdu interaction.
+Requirements validation
+Completed requirements inspection
+Table : Internal review results and limits
+
+Cross document consistency decisions
+Table : Cross document facts checked for continuity
+
+Feasibility and implementation risk
+Table : Subsystem feasibility review
+
+Work can be divided into capture and review, ledger and accounting, product and price data, and assistant and presentation. These are possible work areas rather than assignments to named students. Integration tests and source review are shared responsibilities. A service substitution is acceptable if the same behavioural contracts pass; dropping an approved Must Have capability requires an explicit scope decision.
+Acceptance scenarios and expected calculations
+Table : Executable acceptance scenarios for later implementation testing
+
+The identifiers in the scenario table are acceptance-scenario references, not additional formal requirements. Catalogue acceptance criteria remain authoritative for each FR and NFR. Record build, fixture, actor, steps, expected result, actual result, evidence and pass/fail status when tests run. Failures should link to a defect and the affected requirement ID. Source-reported interview statements are not test results.
+Remaining open issues and review actions
+Table : Open issues requiring human confirmation
+
+Consolidated requirements catalogue
+This index is the canonical lookup for all 103 formal IDs. Detailed statements, acceptance criteria and sources are in their corresponding catalogues above. Counts exclude scope aliases and acceptance-scenario IDs. Priority letters below mean M: Must Have, S: Should Have, C: Could Have; they are abbreviations of the existing priority system, not a second classification.
+Table : Business requirement index
+
+Table : Functional requirement index
+
+Table : Non functional requirement index
+
+Conclusion
+DailyKhata now has a formal, traceable requirements specification for its approved personal and household expense-management scope. The internal audit finds complete capability coverage and continuity with governance, D1 v2.0 and D2 v2.0. The specification preserves the evidence limitations, optional priorities and current exclusions. Its next use is student and supervisor review followed by architecture and implementation work against the stated acceptance criteria. No software or stakeholder acceptance result is claimed by this document.
+References
+[G1] DailyKhata Project Scope. Version 2.0, 23 September 2026. 00_Project_Governance/DailyKhata_Project_Scope.docx. User-authorised baseline.
+[G2] DailyKhata Documentation Standard. Version 2.0, 23 September 2026. 00_Project_Governance/DailyKhata_Documentation_Standard.docx.
+[G3] DailyKhata Canonical Terminology. Version 2.0, 23 September 2026. 00_Project_Governance/DailyKhata_Canonical_Terminology.docx.
+[G4] DailyKhata Decision Log. Version 2.0, 23 September 2026. 00_Project_Governance/DailyKhata_Decision_Log.docx. DEC-01 to DEC-20.
+[G5] DailyKhata Consistency Audit. Version 2.0, 23 September 2026. 00_Project_Governance/DailyKhata_Consistency_Audit.docx.
+[D1] DailyKhata Deliverable 1: Target Market & Audience Analysis. Version 2.0, 23 September 2026. 01_Deliverable_1/DailyKhata_Deliverable_1_v2.0.docx.
+[D2] DailyKhata Deliverable 2: Problem Identification, Stakeholder Identification & Requirement Elicitation. Version 2.0, 23 September 2026. 02_Deliverable_2/DailyKhata_Deliverable_2_v2.0.docx. Evidence, candidate and stakeholder sections.
+[A3] Beaconhouse National University. Deliverable 3: Requirements Specification. Five-page assignment brief, undated. 03_Deliverable_3/task/Deliverable 3.pdf. Rubric heading and total conflict; no mark interpretation is adopted.
+[H1] DailyKhata. Original D1, dailykhata-d1.docx and six-page dailykhata-d1.pdf, 01_Deliverable_1. Historical source, undated.
+[H2] DailyKhata. Original D2, dailykhata-d2.pdf, 02_Deliverable_2. Twelve pages, undated. Historical source-reported fieldwork, especially pp. 3 and 10-12.
+[M1] Design Thinking.pdf. Six instructional slides, 02_Deliverable_2/task. Observation and interview methodology, not DailyKhata fieldwork.
+[M2] Deliverable 1 and Deliverable 2 task.txt files in their respective task folders. Assignment context; D2 deadline does not establish a D3 submission date.
+[M3] Important Links.txt, 02_Deliverable_2/task. Nineteen teaching-video links inventoried; video contents are not treated as project evidence.
+[U3] Project owner instructions for DailyKhata Deliverable 3, supplied 23 September 2026. Scope continuity, formal identifiers, traceability, proposed targets and submission-document requirements.
+[X1] OWASP Cheat Sheet Series. Password Storage Cheat Sheet. https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html. Accessed 23 September 2026. Supporting guidance for adaptive password hashing.
+[X2] OWASP Cheat Sheet Series. Authorization Cheat Sheet. https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html. Accessed 23 September 2026. Supporting guidance for trusted-boundary authorisation checks.
+[X3] OWASP Cheat Sheet Series. File Upload Cheat Sheet. https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html. Accessed 23 September 2026. Supporting guidance for validating uploaded content.
+Appendix glossary
+Table : Canonical terminology and abbreviations
+
+Identifier or term
+Meaning
+BR-001 onwards
+Business outcome and its rationale; not a list of implementation features.
+FR-GROUP-001 onwards
+Observable functional behaviour. Each record has a priority, source chain and acceptance criterion.
+NFR-GROUP-001 onwards
+Quality condition, measurement method and scope source.
+EV, DR, SC and SS
+Existing D2 evidence, preliminary candidate and approved scope identifiers. D3 links rather than replaces them.
+Shall
+Normative behaviour for a requirement selected for delivery. A Should Have or Could Have statement does not become mandatory because it uses shall.
+Acceptance target
+A proposed FYP gate to review before testing, not a measured performance result.
+Source and inference
+Evidence means what the supplied source reports. Project-team analysis and D3 elaborations are labelled separately.
+Level
+Source
+Use in D3
+1
+Current governance [G1-G5]
+Scope, terminology, priorities, reconciliation decisions and document standard.
+2
+D1 v2.0 [D1]
+Project definition, target audience, design personas, problems and market rationale.
+3
+D2 v2.0 [D2]
+EV evidence register, DR candidates, stakeholders and elicitation limitations.
+4
+Official D3 brief [A3]
+Business, functional and quality requirements, traceability and validation.
+5
+Historical D1 and D2 [H1-H2]
+Provenance only where current baseline has reconciled contradictions.
+6
+Task sheets and Design Thinking [M1-M3]
+Assignment context and separation of observation from interpretation.
+7
+External security guidance [X1-X3]
+Limited quality-control rationale, never authority for new product features.
+Priority
+Delivery interpretation
+Rule for dependencies
+Must Have
+Minimum successful DailyKhata FYP.
+Cannot depend on a Should Have or Could Have feature.
+Should Have
+Intended but may be deferred with a recorded reason.
+May depend on core functionality or other selected Should Have features.
+Could Have
+Optional if time and technical capacity permit.
+May depend on a selected higher-priority capability; record the dependency.
+Future Scope
+Potential later work, not a current commitment.
+No current acceptance requirement is created.
+Out of Scope
+Explicitly excluded from the current project.
+Mentioned only to establish the boundary.
+Persona
+Age and role
+Classification
+P-01 Ayesha Tariq
+34; Homemaker and household budget manager
+Primary
+P-02 Bilal Ahmed
+27; Salaried professional
+Primary
+P-03 Hamza Sheikh
+21; University student
+Primary
+P-04 Zubair Hassan
+Not recorded; Family member and spouse of a primary user
+Secondary beneficiary
+P-05 Usman Raza
+41; Small shopkeeper
+Secondary direct user
+Stakeholder
+Classification and interest
+Engagement
+Four project students
+Internal developers and analysts; implementation feasibility and traceability.
+Verify source interpretation, maintain requirement IDs, implement and record tests.
+Nouman Ali
+Internal academic supervisor; scope and academic quality.
+Review requirements and proposed targets; endorsement is not yet recorded.
+Family beneficiaries and advisers
+Secondary information users; understandable expense summaries.
+Review user-shared output without privileged application roles.
+Selected OCR AI and storage providers
+Conditional external technical dependencies; service constraints and data processing.
+Review interfaces, cost, retention and failure behaviour before selection.
+Bank and payment partners
+Future stakeholders only.
+No current integration or delivery dependency.
+ID
+Reported finding
+Provenance and limitation
+EV-01
+Reported Ayesha interview: repeated typing discourages receipt recording.
+Original D2 p. 3; D2 v2.0 evidence register. No transcript.
+EV-02
+Reported Hamza interview: long forms create friction for small cash expenses.
+Original D2 p. 3; D2 v2.0 evidence register. No transcript.
+EV-03
+Reported Usman interview: interest in spoken cash capture; example refers to customer payment.
+Original D2 p. 3. Age 46 conflicts with design age 41; income context does not authorise sales functionality.
+EV-04
+Reported informal observations: entry is delayed or omitted and totals are reconstructed later.
+Original D2 pp. 3 and 11; no observation counts or logs.
+EV-05
+Reported follow-up interviews: photograph or speech input and confirmation of proposed categories.
+Original D2 pp. 10-11; no raw follow-up records or established visit date.
+EV-06
+Historical team-reported examination of Cashew, Wallet and an unnamed bank application.
+Original D2 pp. 10-12; reportedly 30-45 minutes per member on Android. Versions, dates and screenshots absent; not current competitor research.
+EV-07
+Documentary authority: approved scope and project decisions supply required capabilities and priorities.
+D2 v2.0 evidence register; current governance and owner instructions. This is not fieldwork.
+Rule
+Normative interpretation and reason
+E-01 Identity and dates
+Stable opaque identifiers distinguish account, expense, item, category and account mapping. Use the expense calendar date for summaries and a separate creation timestamp. Resolve relative dates using Asia/Karachi. Today may be a visible default in manual entry; missing receipt dates require confirmation. This formalises retrospective entry.
+E-02 Amounts and currency
+Baseline expenses are positive PKR amounts represented exactly to two decimal places. A manually entered total is permitted when OCR fails. Refunds, income workflows, foreign-currency conversion and scheduled future expenses are not added by this specification.
+E-03 Receipt reconciliation
+The payable transaction total is authoritative after review. Allocate it across the categorised purchase lines, including explicit user-reviewed discount, tax or rounding adjustments. Keep adjustments distinct from products and exclude them from product-price history. Block saving until the allocations equal the total; do not invent a missing product to balance it.
+E-04 Counting and categories
+For an itemised receipt, category totals sum its allocations; for an unitemised expense, its single allocation equals the total. Never sum both parent and line totals. The transaction primary category supports display and search; a category filter also matches a line allocation. It does not replace mixed-item allocations.
+E-05 Product quantities
+Keep purchased count, pack size, unit price and line total distinct. Unknown quantity is not silently one. Convert known compatible units, such as g to kg, and show the comparison basis. Separate brands and pack identities even under the same canonical product type.
+E-06 Corrections and deletion
+Preserve original OCR text alongside corrected values while a record exists. Deleting the expense removes its financial content under NFR-PRIV-003; source preservation does not mean retaining deleted content forever. Ordinary history excludes deleted records. Corrections invalidate dependent calculated results.
+E-07 Account framework
+Maintain the five conventional account types: asset, liability, equity, income and expense. The FYP exposes only expense-management workflows; cash is an asset account. Recognising an account type does not create sales, payroll or full financial-statement functionality. Final hierarchy and codes remain architecture decisions.
+E-08 Settings and credentials
+A display name and default summary month give a bounded interpretation of basic profile and settings. Login identifier format and credential rules are documented at implementation review; if passwords are managed locally, use at least 12 characters and permit at least 64. These proposed details do not add social login or account administration.
+E-09 Draft lifetime
+Core draft recovery is limited to the current open authenticated session. Surviving application restart without connectivity is the Could Have offline-draft feature. Pending drafts never count as expenses. Optional archive retention does not make permanent image storage core.
+E-10 Optional data output
+CSV and/or PDF means at least one format, not both. If CSV is selected, user-supplied text beginning with formula-control characters must be exported as inert text and fields escaped correctly. Household output remains an account-holder-controlled selection, not a shared-account service.
+Fixture
+Definition and measurement control
+T1 Ordinary device and network
+Android 11-class device, 4 GB RAM, at least a 360 CSS-pixel-equivalent viewport; one newer Android version. Choose and record native or mobile-web delivery. Test network: at least 10 Mbps down, 2 Mbps up and approximately 100 ms round-trip latency. Record actual conditions, device, build, cold/warm state and provider configuration.
+T2 Capacity and ledger
+Ten isolated test accounts, each with 1000 active expenses and up to ten line items per receipt. Run 20 minutes at one request per account every five seconds, 20 percent writes and the remainder history, search and summary reads. Verify all committed records and report rejected requests separately.
+T3 Security and privacy
+Two accounts with deliberately overlapping merchant and product names but distinct private records; expired sessions, altered object identifiers, malicious filenames, invalid images and cross-account assistant prompts. Include receipt text attempting to override retrieval instructions.
+T4 Financial oracle
+Controlled PKR records with known dates, categories, product identities and expected arithmetic. Include empty data, two periods, zero baseline, repeated expenses, mixed receipt, missing unit, corrected item and deleted transaction. Reference acceptance scenarios in the validation section.
+T5 Receipt extraction
+Twenty consented or synthetic printed receipts, clearly labelled by origin, with 3-12 purchase lines each, legible English or Latin-script text, varied layouts and known payable totals. Use two independent annotation passes and reconcile differences. Keep several blurred/cropped images separate for failure-path tests. Urdu OCR is not implied by Urdu interface support.
+T6 Prospective user and language review
+Five recruited trial users spanning the three primary groups for core tasks; a competent bilingual reviewer for optional Urdu output. Record consent, task script, actual outcomes and defects. These participants have not yet been recruited or tested.
+Priority
+BR
+FR
+NFR
+Scope capabilities
+Must Have
+6
+55
+25
+27
+Should Have
+1
+10
+1
+7
+Could Have
+1
+4
+0
+4
+D2 candidate and finding
+Source evidence
+Business outcome
+Functional requirements
+Quality requirements
+DR-01
+Receipt capture and review
+EV-01, EV-05, EV-07
+BR-001, BR-002, BR-004, BR-006
+FR-CAPTURE-001, FR-CAPTURE-002, FR-CAPTURE-003, FR-OCR-001, FR-OCR-002, FR-OCR-003, FR-OCR-004, FR-OCR-005, FR-OCR-006, FR-OCR-007, FR-REVIEW-001, FR-REVIEW-002, FR-REVIEW-003
+NFR-COMP-001, NFR-DATA-003, NFR-DATA-005, NFR-MAINT-001, NFR-PERF-003, NFR-PRIV-001, NFR-PRIV-002, NFR-REL-002, NFR-SEC-004, NFR-USE-001, NFR-USE-002
+DR-02
+Manual and text capture
+EV-02, EV-03, EV-04, EV-05
+BR-001, BR-002
+FR-REVIEW-003, FR-TXN-001, FR-TXN-002, FR-TXN-003
+NFR-COMP-001, NFR-DATA-001, NFR-DATA-003, NFR-PERF-001, NFR-USE-001, NFR-USE-002
+DR-03
+Optional voice capture
+EV-03, EV-05
+BR-001
+FR-VOICE-001, FR-VOICE-002
+NFR-PRIV-001, NFR-REL-002, NFR-USE-002
+DR-04
+Categorisation with confirmation
+EV-05, EV-06
+BR-002, BR-006
+FR-CAT-001, FR-CAT-002, FR-CAT-003, FR-CAT-004, FR-LEDGER-001
+NFR-COMP-001, NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-MAINT-002, NFR-PERF-002, NFR-REL-001, NFR-SCAL-001, NFR-SEC-003, NFR-USE-002
+DR-05
+Structured accounting records
+EV-07
+BR-002
+FR-COA-001, FR-COA-002, FR-COA-003, FR-COA-004
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-MAINT-002, NFR-REL-001, NFR-SCAL-001
+DR-06
+Ledger visibility and summaries
+EV-04, EV-07
+BR-002, BR-003
+FR-TXN-003, FR-LEDGER-001, FR-LEDGER-002, FR-LEDGER-003, FR-LEDGER-004, FR-DASH-001, FR-DASH-002, FR-DASH-003
+NFR-COMP-001, NFR-DATA-001, NFR-DATA-002, NFR-MAINT-002, NFR-PERF-001, NFR-PERF-002, NFR-REL-001, NFR-SCAL-001, NFR-SEC-003, NFR-USE-001, NFR-USE-002, NFR-USE-003
+DR-07
+Product semantics and price history
+EV-06, EV-07
+BR-003, BR-004
+FR-PRODUCT-001, FR-PRODUCT-002, FR-PRODUCT-003, FR-PRICE-001, FR-PRICE-002, FR-AI-006
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-DATA-004, NFR-MAINT-001, NFR-PERF-003, NFR-PRIV-001, NFR-REL-002, NFR-SEC-003
+DR-08
+AI Financial Assistant
+EV-07 + H1
+BR-003, BR-004, BR-005, BR-006
+FR-AI-001, FR-AI-002, FR-AI-003, FR-AI-004, FR-AI-005, FR-AI-006, FR-AI-007, FR-AI-008, FR-AI-009, FR-AI-010, FR-AI-011
+NFR-DATA-002, NFR-DATA-004, NFR-MAINT-001, NFR-PERF-003, NFR-PRIV-001, NFR-REL-002, NFR-SEC-003
+DR-09
+Identity and record maintenance
+EV-07
+BR-002, BR-005, BR-006
+FR-AUTH-001, FR-AUTH-002, FR-AUTH-003, FR-AUTH-004, FR-PROFILE-001, FR-PROFILE-002, FR-LEDGER-005, FR-LEDGER-006
+NFR-COMP-001, NFR-DATA-001, NFR-DATA-002, NFR-MAINT-002, NFR-PERF-001, NFR-PERF-002, NFR-PRIV-003, NFR-REL-001, NFR-SCAL-001, NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005
+DR-10
+Optional localisation export and labels
+EV-06, EV-07
+BR-007
+FR-CAT-005, FR-REPORT-001, FR-LOC-001, FR-LOC-002, FR-LOC-003
+NFR-COMP-002, NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-DATA-004, NFR-SEC-003, NFR-USE-002, NFR-USE-003
+DR-11
+Optional views and receipt archive
+EV-04, EV-07
+BR-007
+FR-CAPTURE-004, FR-DASH-004, FR-DASH-005
+NFR-COMP-001, NFR-DATA-001, NFR-DATA-002, NFR-PERF-002, NFR-PRIV-002, NFR-PRIV-003, NFR-SEC-003, NFR-USE-003
+DR-12
+Optional personal enhancements
+EV-07
+BR-008
+FR-CAT-006, FR-REPORT-002, FR-OFFLINE-001, FR-REMIND-001
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-PRIV-002, NFR-REL-001, NFR-SEC-003, NFR-USE-002
+Business requirement
+Functional requirements
+FR priorities in row
+BR-001
+Reduce recording effort
+FR-CAPTURE-001, FR-CAPTURE-002, FR-CAPTURE-003, FR-OCR-001, FR-OCR-002, FR-OCR-003, FR-OCR-004
+Must Have: 7
+BR-001
+Reduce recording effort
+FR-OCR-005, FR-OCR-006, FR-OCR-007, FR-REVIEW-001, FR-REVIEW-003, FR-TXN-001, FR-TXN-002
+Must Have: 7
+BR-001
+Reduce recording effort
+FR-VOICE-001, FR-VOICE-002
+Should Have: 2
+BR-002
+Maintain trustworthy expense records
+FR-REVIEW-001, FR-REVIEW-002, FR-TXN-003, FR-CAT-001, FR-CAT-002, FR-CAT-003, FR-CAT-004
+Must Have: 7
+BR-002
+Maintain trustworthy expense records
+FR-COA-001, FR-COA-002, FR-COA-003, FR-COA-004, FR-LEDGER-001, FR-LEDGER-002, FR-LEDGER-003
+Must Have: 7
+BR-002
+Maintain trustworthy expense records
+FR-LEDGER-004, FR-LEDGER-005, FR-LEDGER-006
+Must Have: 3
+BR-003
+Understand recorded spending
+FR-DASH-001, FR-DASH-002, FR-DASH-003, FR-AI-001, FR-AI-002, FR-AI-003, FR-AI-004
+Must Have: 7
+BR-003
+Understand recorded spending
+FR-AI-005, FR-AI-006, FR-AI-007, FR-AI-008, FR-AI-009, FR-AI-010
+Must Have: 6
+BR-004
+Support informed product comparison
+FR-OCR-005, FR-PRODUCT-001, FR-PRODUCT-002, FR-PRODUCT-003, FR-PRICE-001, FR-PRICE-002, FR-AI-006
+Must Have: 7
+BR-005
+Protect personal financial information
+FR-AUTH-001, FR-AUTH-002, FR-AUTH-003, FR-AUTH-004, FR-AI-002, FR-AI-009, FR-AI-011
+Must Have: 7
+BR-006
+Support ordinary smartphone use
+FR-PROFILE-001, FR-PROFILE-002, FR-CAPTURE-003, FR-CAT-004, FR-AI-010
+Must Have: 5
+BR-007
+Adapt presentation and sharing
+FR-CAPTURE-004, FR-CAT-005, FR-DASH-004, FR-DASH-005, FR-REPORT-001, FR-LOC-001, FR-LOC-002
+Should Have: 7
+BR-007
+Adapt presentation and sharing
+FR-LOC-003
+Should Have: 1
+BR-008
+Support flexible recording habits
+FR-CAT-006, FR-REPORT-002, FR-OFFLINE-001, FR-REMIND-001
+Could Have: 4
+Functional ID
+NFR IDs
+Reason
+FR-AUTH-001
+NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001
+Credential and access boundary
+FR-AUTH-002
+NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001
+Credential and access boundary
+FR-AUTH-003
+NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001
+Credential and access boundary
+FR-AUTH-004
+NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-005, NFR-COMP-001
+Credential and access boundary
+FR-PROFILE-001
+NFR-PERF-001, NFR-SEC-003
+Persistent settings and device response
+FR-PROFILE-002
+NFR-PERF-001, NFR-SEC-003
+Persistent settings and device response
+FR-CAPTURE-001
+NFR-COMP-001, NFR-USE-002, NFR-SEC-004
+Safe input and visible processing
+FR-CAPTURE-002
+NFR-SEC-004, NFR-PRIV-002, NFR-PERF-003, NFR-REL-002
+Safe input and visible processing
+FR-CAPTURE-003
+NFR-SEC-004, NFR-PRIV-002, NFR-PERF-003, NFR-REL-002
+Safe input and visible processing
+FR-CAPTURE-004
+NFR-SEC-003, NFR-PRIV-002, NFR-PRIV-003
+Safe input and visible processing
+FR-OCR-001
+NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+Fidelity provenance and bounded waiting
+FR-OCR-002
+NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+Fidelity provenance and bounded waiting
+FR-OCR-003
+NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+Fidelity provenance and bounded waiting
+FR-OCR-004
+NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+Fidelity provenance and bounded waiting
+FR-OCR-005
+NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+Fidelity provenance and bounded waiting
+FR-OCR-006
+NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+Fidelity provenance and bounded waiting
+FR-OCR-007
+NFR-PERF-003, NFR-PRIV-001, NFR-DATA-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+Fidelity provenance and bounded waiting
+FR-REVIEW-001
+NFR-USE-002, NFR-DATA-003, NFR-USE-001, NFR-COMP-001
+Correction and input clarity
+FR-REVIEW-002
+NFR-USE-002, NFR-DATA-003, NFR-USE-001, NFR-COMP-001
+Correction and input clarity
+FR-REVIEW-003
+NFR-USE-002, NFR-DATA-003, NFR-USE-001, NFR-COMP-001
+Correction and input clarity
+FR-TXN-001
+NFR-PERF-001, NFR-USE-001, NFR-USE-002, NFR-DATA-001, NFR-COMP-001
+Low-effort valid monetary entry
+FR-TXN-002
+NFR-PERF-001, NFR-USE-001, NFR-USE-002, NFR-DATA-001, NFR-COMP-001
+Low-effort valid monetary entry
+FR-TXN-003
+NFR-PERF-001, NFR-USE-001, NFR-USE-002, NFR-DATA-001, NFR-COMP-001
+Low-effort valid monetary entry
+FR-VOICE-001
+NFR-PRIV-001, NFR-USE-002, NFR-REL-002
+Reviewed optional speech path
+FR-VOICE-002
+NFR-PRIV-001, NFR-USE-002, NFR-REL-002
+Reviewed optional speech path
+FR-CAT-001
+NFR-DATA-003, NFR-USE-002, NFR-SEC-003
+Stable confirmed classifications
+FR-CAT-002
+NFR-DATA-003, NFR-USE-002, NFR-SEC-003
+Stable confirmed classifications
+FR-CAT-003
+NFR-DATA-003, NFR-USE-002, NFR-SEC-003
+Stable confirmed classifications
+FR-CAT-004
+NFR-DATA-003, NFR-USE-002, NFR-SEC-003
+Stable confirmed classifications
+FR-CAT-005
+NFR-DATA-003, NFR-USE-002, NFR-SEC-003
+Stable confirmed classifications
+FR-CAT-006
+NFR-DATA-003, NFR-USE-002, NFR-SEC-003
+Stable confirmed classifications
+FR-COA-001
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001
+Reconciled persistent accounting data
+FR-COA-002
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001
+Reconciled persistent accounting data
+FR-COA-003
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001
+Reconciled persistent accounting data
+FR-COA-004
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003, NFR-REL-001, NFR-MAINT-002, NFR-SCAL-001
+Reconciled persistent accounting data
+FR-PRODUCT-001
+NFR-DATA-003, NFR-DATA-002, NFR-SEC-003
+Separate identities and provenance
+FR-PRODUCT-002
+NFR-DATA-003, NFR-DATA-002, NFR-SEC-003
+Separate identities and provenance
+FR-PRODUCT-003
+NFR-DATA-003, NFR-DATA-002, NFR-SEC-003
+Separate identities and provenance
+FR-PRICE-001
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003
+Comparable quantities and current history
+FR-PRICE-002
+NFR-DATA-001, NFR-DATA-002, NFR-DATA-003
+Comparable quantities and current history
+FR-LEDGER-001
+NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001
+Atomic owned records and coherent revisions
+FR-LEDGER-002
+NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001
+Atomic owned records and coherent revisions
+FR-LEDGER-003
+NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001
+Atomic owned records and coherent revisions
+FR-LEDGER-004
+NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001
+Atomic owned records and coherent revisions
+FR-LEDGER-005
+NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001
+Atomic owned records and coherent revisions
+FR-LEDGER-006
+NFR-REL-001, NFR-DATA-001, NFR-DATA-002, NFR-SEC-003, NFR-PERF-002, NFR-COMP-001, NFR-MAINT-002, NFR-SCAL-001, NFR-PRIV-003
+Atomic owned records and coherent revisions
+FR-DASH-001
+NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001
+Correct totals and readable timely views
+FR-DASH-002
+NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001
+Correct totals and readable timely views
+FR-DASH-003
+NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001
+Correct totals and readable timely views
+FR-DASH-004
+NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001
+Correct totals and readable timely views
+FR-DASH-005
+NFR-PERF-002, NFR-DATA-001, NFR-DATA-002, NFR-USE-003, NFR-COMP-001
+Correct totals and readable timely views
+FR-AI-001
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-002
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-003
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-004
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-005
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-006
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-007
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-008
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-009
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-010
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-AI-011
+NFR-DATA-004, NFR-SEC-003, NFR-PRIV-001, NFR-PERF-003, NFR-REL-002, NFR-DATA-002, NFR-MAINT-001
+Grounded authorised answers and service failure
+FR-REPORT-001
+NFR-SEC-003, NFR-DATA-001, NFR-DATA-002
+Owned consistent exported data
+FR-REPORT-002
+NFR-SEC-003, NFR-DATA-001, NFR-DATA-002
+Owned consistent exported data
+FR-LOC-001
+NFR-COMP-002, NFR-DATA-004, NFR-USE-003
+Equivalent language meaning and layout
+FR-LOC-002
+NFR-COMP-002, NFR-DATA-004, NFR-USE-003
+Equivalent language meaning and layout
+FR-LOC-003
+NFR-COMP-002, NFR-DATA-004, NFR-USE-003
+Equivalent language meaning and layout
+FR-OFFLINE-001
+NFR-PRIV-002, NFR-REL-001, NFR-SEC-003
+Protected drafts and single commitment
+FR-REMIND-001
+NFR-USE-002, NFR-PRIV-002
+Understandable optional notification controls
+Scope and priority
+Capability
+Formal requirements
+SC-01
+Must Have
+User registration and authentication
+FR-AUTH-001, FR-AUTH-002, FR-AUTH-003, FR-AUTH-004, NFR-SEC-001, NFR-SEC-005
+SC-02
+Must Have
+Basic user profile and settings
+FR-PROFILE-001, FR-PROFILE-002
+SC-03
+Must Have
+Personal digital expense ledger
+FR-TXN-003, FR-LEDGER-001, NFR-REL-001, NFR-SCAL-001
+SC-04
+Must Have
+Photograph or upload receipts
+FR-CAPTURE-001, FR-CAPTURE-002, NFR-SEC-004
+SC-05
+Must Have
+OCR processing
+FR-CAPTURE-003, FR-OCR-001, NFR-PERF-003, NFR-REL-002, NFR-MAINT-001, NFR-DATA-005
+SC-06
+Must Have
+Structured extraction of merchant and date where available, line items, quantities where available, prices and receipt total
+FR-OCR-001, FR-OCR-002, FR-OCR-003, FR-OCR-004, FR-OCR-005, FR-OCR-006, FR-OCR-007, NFR-DATA-005
+SC-07
+Must Have
+Review OCR results and edit incorrect extracted values before saving
+FR-REVIEW-001, FR-REVIEW-002, FR-REVIEW-003, NFR-USE-001, NFR-USE-002
+SC-08
+Must Have
+Manual quick expense entry
+FR-REVIEW-003, FR-TXN-001, FR-TXN-003, NFR-USE-001
+SC-09
+Must Have
+Text-based cash expense entry
+FR-TXN-002, FR-TXN-003
+SC-10
+Should Have
+Voice-based cash expense entry
+FR-VOICE-001, FR-VOICE-002
+SC-11
+Must Have
+Automatic transaction and line-item categorisation
+FR-CAT-001, FR-CAT-002
+SC-12
+Must Have
+User confirmation or correction of AI-generated categories
+FR-CAT-003, FR-LEDGER-001, NFR-USE-002, NFR-DATA-003
+SC-13
+Must Have
+Locally understandable expense category labels
+FR-CAT-004
+SC-14
+Must Have
+Full internal Chart of Accounts
+FR-COA-001, NFR-DATA-003
+SC-15
+Must Have
+Mapping of user-facing categories to accounting accounts
+FR-COA-002, NFR-DATA-003
+SC-16
+Must Have
+Accounting-compatible transaction storage
+FR-COA-003, FR-COA-004, NFR-REL-001, NFR-DATA-001, NFR-MAINT-002
+SC-17
+Must Have
+Transaction history
+FR-LEDGER-002, FR-LEDGER-003
+SC-18
+Must Have
+Search and filtering
+FR-LEDGER-004, NFR-PERF-002
+SC-19
+Must Have
+Category-level spending totals
+FR-DASH-001, NFR-DATA-001
+SC-20
+Must Have
+Basic monthly spending summaries
+FR-DASH-002, NFR-PERF-002
+SC-21
+Must Have
+Item-level price history
+FR-PRICE-001, FR-PRICE-002, NFR-DATA-002
+SC-22
+Must Have
+Semantic product classification
+FR-PRODUCT-001, FR-PRODUCT-002, FR-PRODUCT-003, FR-PRICE-002, FR-AI-006, NFR-DATA-003
+SC-23
+Must Have
+Natural-language financial querying
+FR-AI-001, FR-AI-002
+SC-24
+Must Have
+AI Financial Assistant
+FR-AI-001, FR-AI-002, FR-AI-003, FR-AI-004, FR-AI-005, FR-AI-006, FR-AI-007, FR-AI-008, FR-AI-009, FR-AI-010, FR-AI-011, NFR-PERF-003, NFR-REL-002, NFR-DATA-004, NFR-MAINT-001
+SC-25
+Must Have
+Dashboard
+FR-DASH-003, NFR-PERF-002
+SC-26
+Must Have
+Editing and deleting saved expense transactions
+FR-LEDGER-005, FR-LEDGER-006, NFR-PRIV-003, NFR-DATA-002, NFR-MAINT-002
+SC-27
+Must Have
+Secure user-data storage
+FR-AUTH-004, FR-AI-009, FR-AI-011, NFR-SEC-001, NFR-SEC-002, NFR-SEC-003, NFR-SEC-004, NFR-SEC-005, NFR-PRIV-001, NFR-PRIV-002, NFR-PRIV-003, NFR-MAINT-002
+SC-28
+Should Have
+English and Urdu localisation
+FR-LOC-001, FR-LOC-002, FR-LOC-003, NFR-COMP-002
+SC-29
+Should Have
+CSV and/or PDF export
+FR-REPORT-001
+SC-30
+Must Have
+Reasonable support for ordinary Android-class devices
+NFR-PERF-001, NFR-PERF-002, NFR-USE-001, NFR-USE-002, NFR-USE-003, NFR-REL-002, NFR-COMP-001, NFR-MAINT-001, NFR-SCAL-001
+SS-03
+Should Have
+Custom category labels
+FR-CAT-005
+SS-04
+Should Have
+Simple spending visualisations
+FR-DASH-004
+SS-05
+Should Have
+Month-to-month comparison views
+FR-DASH-005
+SS-06
+Should Have
+Receipt image archive
+FR-CAPTURE-004
+SS-08
+Could Have
+User-created categories
+FR-CAT-006
+SS-09
+Could Have
+Offline draft expense entry
+FR-OFFLINE-001
+SS-10
+Could Have
+Expense reminders
+FR-REMIND-001
+SS-11
+Could Have
+Exportable household summaries
+FR-REPORT-002
+ID
+Assumption
+Consequence and response
+AS-01
+Internet is available for selected cloud OCR and assistant operations.
+If unavailable, show failure and offer manual entry; optional offline drafts do not promise offline AI.
+AS-02
+Users can provide legible supported printed receipt images and review uncertain output.
+Poor images use recapture or manual correction. No universal handwriting or Urdu OCR promise is made.
+AS-03
+The team can access an affordable OCR and language-model option.
+Validate cost and limits early; use replaceable interfaces and test substitutes. Budget and vendor are not yet established.
+AS-04
+A representative Android device and consented trial users can be obtained.
+Document any emulator-only or unrepresentative evaluation and seek the missing validation rather than claiming it occurred.
+AS-05
+Stored records may be incomplete relative to real spending.
+Summaries and suggestions explicitly describe recorded data and their date ranges.
+Dependency
+Required contract
+Risk and validation
+Identity and storage
+Account identity, protected operations, stable records, atomic save and version-aware revisions.
+Early two-account and interrupted-save tests; inspect ownership and storage configuration.
+OCR component
+Supported image to original text and structured candidates, explicit errors and missing fields.
+Evaluate T5 before optional feature work; retain manual fallback and measurable provider latency.
+Category and product interpretation
+Proposed classifications with uncertainty and separate identities.
+Use local vocabulary and controlled fixtures; preserve user corrections.
+AI model and retrieval
+Natural-language question to bounded authorised retrieval and explainable answer; read-only access.
+Verify deterministic calculations separately, inspect payloads and test prompt-based boundary violations.
+Device and network
+Camera/file input, readable core UI and observable network states.
+Run actual Android acceptance scenarios and failure injection.
+Optional speech and export
+Speech produces editable text; export produces an owned data selection.
+Evaluate only if selected; no core workflow depends on them.
+Optional localisation and notifications
+Translated strings, RTL rendering and local scheduling permissions.
+Bilingual review and device-permission tests; defer explicitly if not validated.
+Criterion
+Review performed
+Result and limit
+Correctness and necessity
+Compared significant project facts and requirement purpose with governance, D1 and D2.
+Aligned with the current baseline; fieldwork authenticity and supervisor endorsement remain unverified.
+Completeness
+Checked all 38 scope IDs and all 27 Must Have capabilities against formal coverage.
+No uncovered scope capability; all optional capabilities retain their classifications.
+Unique identification
+Checked 8 BR, 69 FR and 26 NFR IDs and statements in the internal model.
+103 unique formal IDs; no duplicate FR statement or unresolved reference.
+Priority consistency
+Compared FR scope priority and dependency direction.
+55 Must Have, 10 Should Have and 4 Could Have FRs; no Must Have dependency on optional functionality.
+Traceability
+Checked all FR business, scope, DR, evidence and NFR links; checked every NFR has a functional link.
+No orphan FR or NFR. Documentary authority is distinguished from reported fieldwork.
+Clarity and testability
+Reviewed shall statements, acceptance oracles, exceptions and proposed measurement conditions.
+Every FR has an observable acceptance result; every NFR has a verification method. Targets await pilot review.
+Feasibility
+Reviewed each subsystem against a four-student integration approach.
+Bounded implementation is plausible; OCR quality, AI grounding, provider cost and evaluation access remain material risks.
+Evidence integrity
+Compared EV and DR provenance with D2 and historical-source cautions.
+No new interview, survey, user-test result, market statistic or implementation claim is asserted.
+Source preservation
+Compared hashes against the pre-authoring input manifest.
+All 17 recorded input files are unchanged. D1 and D2 have not been edited.
+Topic
+D3 treatment
+Baseline decision
+Project and users
+Same definition, problem and three primary groups; same five personas and ages.
+D1 and D2; DEC-01 to DEC-04.
+Evidence discrepancy
+Usman persona is 41; participant age 46 stays a source issue. No new age for Zubair.
+DEC-01 and DEC-03.
+Capture and categories
+Manual and text core; voice optional; user confirmation required.
+DEC-06 and DEC-07.
+Accounting
+Stable accounts, mappings and reconciliation; balanced journals wherever used.
+DEC-17; E-03 and E-07 elaborate, not certify.
+Product semantics
+Separate source text, corrected name, identity, brand, type, category and account.
+DEC-20; deletion retention does not imply permanent image archive.
+Assistant and comparisons
+Core conversational comparisons and historical patterns; optional dedicated views.
+DEC-13; future predictive systems remain excluded.
+Localisation and connectivity
+Urdu and voice remain Should Have; offline drafts Could Have.
+DEC-07, DEC-11 and DEC-14.
+Households and shopkeepers
+Single account, user-shared output, expense-only shopkeeper use.
+DEC-03 to DEC-05.
+Scope and identifiers
+All SC/SS priorities preserved; aliases retained. Formal IDs begin in D3.
+G1 and D2; DEC-14.
+Numerical elaborations
+Performance, capacity, receipt-set, session and retention values are proposed targets.
+DEC-10 and D2 quality expectations; no past benchmark claim.
+Subsystem
+Complexity and dependency
+Data and testing
+Practical boundary
+Identity profile and ledger
+Moderate; authenticated storage and atomic revisions.
+Two-account fixtures, stale edits and interrupted saves.
+Use one account model and one authoritative ledger.
+Receipt OCR and review
+High integration risk; image quality and provider extraction.
+T5 annotated receipts plus unreadable inputs.
+Printed supported images; review and manual completion remain core.
+Categorisation and accounts
+Moderate; local taxonomy and reconciled allocations.
+Mixed-category receipts, corrections and account mappings.
+Fixed local categories first; no business accounting interface.
+Product semantics and prices
+High data-quality risk; identity and unit normalisation.
+Detergent brands, pack sizes, missing units and corrections.
+Small curated product-type vocabulary can support the initial evaluation; preserve unknown values.
+Dashboard search and export
+Moderate; reuse ledger queries.
+Known totals, filters and optional file inspection.
+Core summary first; dedicated visuals and exports follow priorities.
+AI Financial Assistant
+High; bounded retrieval, model dependency and reliable arithmetic.
+Controlled questions, missing data, cross-account and injection cases.
+Use existing models, deterministic calculations and read-only tools; no model training commitment.
+Optional capabilities
+Variable; speech, RTL, local storage and notification permissions.
+Bilingual review, offline replay and permission denial.
+Deliver only selected optional features after the Must Have path passes.
+Scenario
+Fixture and action
+Expected result and linked requirements
+AT-01 Receipt review
+Use a clear receipt with rice 100 and detergent 50; process, correct categories and confirm.
+Draft does not count. Saved total is 150, Ration is 100 and Household Supplies is 50. FR-OCR-001 to 007, FR-REVIEW-001 to 003, FR-CAT-001 to 004, FR-LEDGER-001, NFR-DATA-001.
+AT-02 Cash and dates
+Enter rickshaw fare 120 yesterday through text, then an expense dated last month through manual entry.
+Both require review; the local dates are explicit and each belongs to its expense month. FR-TXN-001 to 003, FR-DASH-002.
+AT-03 Reconciliation
+Receipt total 150 with item totals 160 due to a printed discount of 10. Review adjustment allocations before saving.
+Final category allocations total 150; the discount is not a product-price record. Unresolved mismatch blocks save. FR-COA-003, FR-LEDGER-001, NFR-DATA-001.
+AT-04 Double entry
+When selected, record groceries paid from cash for 2500; attempt a journal with credits 2400.
+Valid journal balances at 2500 per side; invalid journal is rejected. FR-COA-004. If not selected, document architecture decision and test allocations instead.
+AT-05 Product comparison
+Surf Excel 1kg at 600 and Bonus 500g at 350, both Laundry Detergent; another item has unknown pack size.
+Separate identities; 600/kg versus 700/kg. Unknown pack has no comparable-unit conclusion. FR-PRODUCT-001 to 003, FR-PRICE-001 to 002, FR-AI-006.
+AT-06 Period and savings
+Dining 8400 this month versus 5900 last month; ask what changed and where savings are possible.
+Increase 2500; hypothetical return to earlier level could reduce spending by 2500, with periods and assumptions. FR-AI-004, 007, 008, 009; NFR-DATA-004.
+AT-07 Maintenance
+Change a saved expense date, amount and category; then delete it and repeat all relevant queries.
+One coherent revision, then no active contribution to summaries or prices; retention follows policy. FR-LEDGER-005 to 006, NFR-DATA-002, NFR-PRIV-003.
+AT-08 Authorisation
+A requests B's transaction or asks the assistant to ignore ownership using text embedded in a receipt.
+No cross-account disclosure or write action. FR-AUTH-004, FR-AI-002 and 011, NFR-SEC-003.
+AT-09 Recovery
+Interrupt save and retry the same request; separately time out OCR and AI.
+One complete committed expense or none; clear processing and timeout state, manual recovery available. NFR-REL-001 to 002 and NFR-PERF-003.
+AT-10 Missing information
+Ask a percentage change from zero, a price comparison without units and an answer from an empty ledger.
+Undefined percentage, explicit comparison limitation and no-records explanation respectively. FR-PRICE-002, FR-AI-004, 006 and 010.
+AT-11 Optional release
+For each selected optional feature, run its catalogue acceptance result plus relevant shared NFR checks.
+Optional voice, labels, export, views, archive, localisation, categories, offline drafts and reminders have recorded pass/fail/deferred status. No deferred feature is described as implemented.
+Issue
+Required review
+Effect on baseline
+OI-01 Evidence provenance
+Project team to locate interview dates, consent and source records; confirm actual Usman participant age.
+Does not change the canonical persona age unless a controlled decision approves it.
+OI-02 Academic review
+Students verify the AI-assisted classification and supervisor reviews the proposed baseline. Confirm D3 submission date and the brief's conflicting 10-mark heading versus 20-mark total.
+No supervisor endorsement or grading interpretation is claimed.
+OI-03 Acceptance targets
+Review proposed device, capacity, timing, extraction-fidelity, usability, credential and retention targets after a pilot.
+Targets are explicit proposals; changes require logged rationale and affected IDs.
+OI-04 Architecture and providers
+Select delivery mode, database, OCR/model providers, budget and retention settings; decide whether double-entry journals are used.
+Vendor-neutral contracts stay fixed. Balance is mandatory wherever journals are implemented.
+OI-05 Optional release selection
+Record which Should Have and Could Have features are included and obtain bilingual review if Urdu is selected.
+No optional feature is guaranteed or silently upgraded.
+OI-06 Evaluation resources
+Acquire representative devices, annotated receipts and prospective trial participants.
+No implementation, benchmark or real-user validation is claimed until evidence is collected.
+ID
+Title
+Priority
+BR-001
+Reduce recording effort
+M
+BR-002
+Maintain trustworthy expense records
+M
+BR-003
+Understand recorded spending
+M
+BR-004
+Support informed product comparison
+M
+BR-005
+Protect personal financial information
+M
+BR-006
+Support ordinary smartphone use
+M
+BR-007
+Adapt presentation and sharing
+S
+BR-008
+Support flexible recording habits
+C
+ID
+Title
+Priority
+FR-AUTH-001
+Account registration
+M
+FR-AUTH-002
+Login
+M
+FR-AUTH-003
+Logout
+M
+FR-AUTH-004
+Authorised access boundary
+M
+FR-PROFILE-001
+Basic profile
+M
+FR-PROFILE-002
+Basic settings
+M
+FR-CAPTURE-001
+Receipt photograph
+M
+FR-CAPTURE-002
+Receipt upload
+M
+FR-CAPTURE-003
+Processing states and retry
+M
+FR-CAPTURE-004
+Receipt image archive
+S
+FR-OCR-001
+OCR text preservation
+M
+FR-OCR-002
+Merchant extraction
+M
+FR-OCR-003
+Date extraction
+M
+FR-OCR-004
+Line item extraction
+M
+FR-OCR-005
+Quantity and unit extraction
+M
+FR-OCR-006
+Price extraction
+M
+FR-OCR-007
+Receipt total extraction
+M
+FR-REVIEW-001
+Draft review
+M
+FR-REVIEW-002
+Correction of extracted values
+M
+FR-REVIEW-003
+Discard and manual fallback
+M
+FR-TXN-001
+Manual quick expense entry
+M
+FR-TXN-002
+Text based cash expense entry
+M
+FR-TXN-003
+Retrospective expense date
+M
+FR-VOICE-001
+Voice transcription
+S
+FR-VOICE-002
+Voice expense draft
+S
+FR-CAT-001
+Transaction category proposal
+M
+FR-CAT-002
+Line item category proposal
+M
+FR-CAT-003
+Category confirmation and correction
+M
+FR-CAT-004
+Local category labels
+M
+FR-CAT-005
+Custom category labels
+S
+FR-CAT-006
+User created categories
+C
+FR-COA-001
+Internal account framework
+M
+FR-COA-002
+Category account mapping
+M
+FR-COA-003
+Accounting compatible storage
+M
+FR-COA-004
+Balanced journals where used
+M
+FR-PRODUCT-001
+Separate product identity fields
+M
+FR-PRODUCT-002
+Semantic product classification
+M
+FR-PRODUCT-003
+Semantic correction
+M
+FR-PRICE-001
+Item level price history
+M
+FR-PRICE-002
+Comparable product prices
+M
+FR-LEDGER-001
+Confirmed transaction commitment
+M
+FR-LEDGER-002
+Transaction detail
+M
+FR-LEDGER-003
+Transaction history
+M
+FR-LEDGER-004
+Search and filtering
+M
+FR-LEDGER-005
+Edit saved transaction
+M
+FR-LEDGER-006
+Delete saved transaction
+M
+FR-DASH-001
+Category spending totals
+M
+FR-DASH-002
+Monthly spending summary
+M
+FR-DASH-003
+Dashboard overview
+M
+FR-DASH-004
+Spending visualisations
+S
+FR-DASH-005
+Month comparison view
+S
+FR-AI-001
+Conversational financial query
+M
+FR-AI-002
+Authorised transaction lookup
+M
+FR-AI-003
+Spending and category summaries
+M
+FR-AI-004
+Period comparison and explanation
+M
+FR-AI-005
+Recurring spending and patterns
+M
+FR-AI-006
+Semantic product price answers
+M
+FR-AI-007
+Unusually high recorded spending
+M
+FR-AI-008
+Personalised saving suggestions
+M
+FR-AI-009
+Grounded answer presentation
+M
+FR-AI-010
+Missing data and service failure
+M
+FR-AI-011
+Read only assistant authority
+M
+FR-REPORT-001
+Expense export
+S
+FR-REPORT-002
+Household summary export
+C
+FR-LOC-001
+Language selection
+S
+FR-LOC-002
+Urdu presentation
+S
+FR-LOC-003
+Urdu assistant interaction
+S
+FR-OFFLINE-001
+Offline expense drafts
+C
+FR-REMIND-001
+Expense reminder
+C
+ID
+Title
+Priority
+NFR-PERF-001
+Ordinary interaction response
+M
+NFR-PERF-002
+Ledger query response
+M
+NFR-PERF-003
+Bounded cloud waiting
+M
+NFR-SEC-001
+Password protection
+M
+NFR-SEC-002
+Transport and secrets
+M
+NFR-SEC-003
+Object authorisation
+M
+NFR-SEC-004
+Upload controls
+M
+NFR-SEC-005
+Session protection
+M
+NFR-PRIV-001
+Service data minimisation
+M
+NFR-PRIV-002
+Protected storage and logs
+M
+NFR-PRIV-003
+Deletion retention boundary
+M
+NFR-USE-001
+Core task completion
+M
+NFR-USE-002
+Correction and error clarity
+M
+NFR-USE-003
+Mobile readability
+M
+NFR-REL-001
+Atomic save and retry
+M
+NFR-REL-002
+Service failure recovery
+M
+NFR-DATA-001
+Money and allocation integrity
+M
+NFR-DATA-002
+Revision consistency
+M
+NFR-DATA-003
+Classification and provenance integrity
+M
+NFR-DATA-004
+Grounded financial calculations
+M
+NFR-COMP-001
+Android compatibility
+M
+NFR-COMP-002
+Localisation quality
+S
+NFR-MAINT-001
+Interface separation
+M
+NFR-MAINT-002
+Requirements and regression records
+M
+NFR-SCAL-001
+Bounded academic capacity
+M
+NFR-DATA-005
+Receipt extraction fidelity
+M
+Term
+Meaning in this specification
+DailyKhata
+The personal expense-management application defined by the approved scope.
+OCR
+Optical character recognition; proposes text from receipt images.
+Receipt digitisation
+Capture and transformation of a receipt into reviewable structured expense data.
+Expense transaction
+One confirmed expense with an owner, date, amount and categorised accounting allocations.
+Line item
+An individual purchase line within a receipt; distinct from the transaction total.
+Automatic categorisation
+A machine proposal for transaction or line-item category, subject to user confirmation or correction.
+Expense category
+User-understandable spending classification; its label is separate from its identity.
+Chart of Accounts
+Internal register of stable accounting accounts, types and references.
+Semantic product classification
+Mapping to canonical product types while preserving source text, brand and product identity.
+Item-level price history
+Historical recorded product prices with purchase context and comparable quantity where available.
+AI Financial Assistant
+Read-only conversational analysis of the current user's authorised DailyKhata records.
+Localisation
+Optional adaptation of interface language and presentation, including potential Urdu RTL support.
+PKR and Rs.
+Pakistani rupee; the baseline currency. Amounts use exact two-decimal representation.
+RTL
+Right-to-left text and interface presentation where required for Urdu.
+FYP and SRS
+Final Year Project and Software Requirements Specification.
+Draft and commitment
+An unconfirmed working record and the explicit transition to one saved expense. Drafts do not contribute to financial totals.
